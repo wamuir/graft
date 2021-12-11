@@ -6,7 +6,7 @@ go_library(
         "gradients.go",
         "op.go",
         "scope.go",
-        "wrappers.go",
+        ":wrappers",  # keep
     ],
     importpath = "github.com/wamuir/graft/tensorflow/op",
     visibility = ["//visibility:public"],
@@ -23,6 +23,14 @@ go_test(
     ],
     embed = [":op"],
     deps = ["//tensorflow"],
+)
+
+genrule(
+    name = "wrappers",
+    srcs = ["//third_party/org_tensorflow:base_api_def"],
+    outs = ["wrappers.go"],
+    cmd = "$(execpath //tools/genop) $(SRCS) > $@",
+    tools = ["//tools/genop"],
 )
 
 alias(
