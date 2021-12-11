@@ -1,0 +1,50 @@
+---
+name: nightly
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '00 18 * * *'
+  workflow_dispatch:
+
+env:
+  USE_BAZEL_VERSION: "latest"
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      nightly-hash: ${{ steps.lsh-remote.outputs.nightly-hash }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1
+
+      - name: Get commit hash
+        id: lsh-remote
+        run: |
+          H=$(git ls-remote -h https://github.com/tensorflow/tensorflow nightly)
+          echo ::set-output name=nightly-hash::$(echo ${H} | awk '{ print $1 }')
+
+      - name: Log Bazel version
+        run: bazelisk version
+
+      - name: Test
+        run: bazelisk test --config=ci -- //...
+
+      - name: Build
+        run: bazelisk build --config=ci -- //tools/lib_package:libtensorflow_go
+
+      - name: Archive libtensorflow_go
+        uses: actions/upload-artifact@v2
+        with:
+          name: libtensorflow_go
+          path: bazel-bin/tools/lib_package/libtensorflow_go.tar.gz
+          retention-days: 3 
