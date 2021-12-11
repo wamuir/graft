@@ -1,0 +1,21 @@
+diff --git a/third_party/org_golang_google_protobuf-gazelle.patch b/third_party/org_golang_google_protobuf-gazelle.patch
+index cede730d..969a3978 100644
+--- a/third_party/org_golang_google_protobuf-gazelle.patch
++++ b/third_party/org_golang_google_protobuf-gazelle.patch
+@@ -3634,3 +3634,16 @@ diff -urN a/types/pluginpb/BUILD.bazel b/types/pluginpb/BUILD.bazel
+ +    actual = ":pluginpb",
+ +    visibility = ["//visibility:public"],
+ +)
++diff --git a/internal/detrand/rand.go b/internal/detrand/rand.go
++index 49c8676..4c35aa3 100644
++--- a/internal/detrand/rand.go
+++++ b/internal/detrand/rand.go
++@@ -35,7 +35,7 @@ func Intn(n int) int {
++ }
++ 
++ // randSeed is a best-effort at an approximate hash of the Go binary.
++-var randSeed = binaryHash()
+++var randSeed = uint64(0)
++ 
++ func binaryHash() uint64 {
++ 	// Open the Go binary.
