@@ -60,3 +60,8 @@ protobuf_deps()
 load("//third_party/org_tensorflow:workspace.bzl", "tf_repositories")
 
 tf_repositories()
+
+# load("@//:deps.bzl", "go_dependencies")
+#
+# gazelle:repository_macro tensorflow/deps.bzl%go_dependencies
+# go_dependencies()

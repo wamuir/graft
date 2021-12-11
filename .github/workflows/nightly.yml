@@ -81,10 +81,15 @@ jobs:
       - name: Update bindings
         run: |
           rm -rf tensorflow
-          tar xzf libtensorflow_graft.tar.gz \
-            ./src/github.com/wamuir/graft/tensorflow \
-            --strip-components=5
+          tar xz --strip-components=5 \
+            -f libtensorflow_graft.tar.gz \
+            ./src/github.com/wamuir/graft/tensorflow
           rm libtensorflow_graft.tar.gz
+
+      - name: Run gazelle
+        run: |
+          bazelisk run //:gazelle
+          bazelisk run //:gazelle-update-repos
 
       - name: Test bindings
         run: bazelisk test --config=ci -- //tensorflow/...
@@ -103,10 +108,15 @@ jobs:
       - name: Update bindings
         run: |
           rm -rf tensorflow
-          tar xzf libtensorflow_graft.tar.gz \
-            ./src/github.com/wamuir/graft/tensorflow \
-            --strip-components=5
+          tar xz --strip-components=5 \
+            -f libtensorflow_graft.tar.gz \
+            ./src/github.com/wamuir/graft/tensorflow
           rm libtensorflow_graft.tar.gz
+
+      - name: Run gazelle
+        run: |
+          bazelisk run //:gazelle
+          bazelisk run //:gazelle-update-repos
 
       - name: Check working tree for changes
         id: git-status
@@ -119,6 +129,7 @@ jobs:
         run: |
           git config --global user.name 'William Muir'
           git config --global user.email 'wamuir@gmail.com'
-          git commit -am "[automated] Integrate changes from nightly build" \
+          git add tensorflow/
+          git commit -m "[automated] Integrate changes from nightly build" \
             -m "tensorflow/tensorflow@${{ needs.build.outputs.nightly-hash }}"
           git push
