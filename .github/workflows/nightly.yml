@@ -47,7 +47,7 @@ jobs:
         with:
           name: libtensorflow_go
           path: bazel-bin/tools/lib_package/libtensorflow_go.tar.gz
-          retention-days: 3 
+          retention-days: 3
 
       - name: Build libtensorflow_graft
         run: bazelisk build --config=ci -- //tools/graft_package:libtensorflow_graft
@@ -57,4 +57,68 @@ jobs:
         with:
           name: libtensorflow_graft
           path: bazel-bin/tools/graft_package/libtensorflow_graft.tar.gz
-          retention-days: 3 
+          retention-days: 3
+
+  test:
+    needs: build
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1
+
+      - name: Download libtensorflow_graft
+        uses: actions/download-artifact@v2
+        with:
+          name: libtensorflow_graft
+
+      - name: Update bindings
+        run: |
+          rm -rf tensorflow
+          tar xzf libtensorflow_graft.tar.gz \
+            ./src/github.com/wamuir/graft/tensorflow \
+            --strip-components=5
+          rm libtensorflow_graft.tar.gz
+
+      - name: Test bindings
+        run: bazelisk test --config=ci -- //tensorflow/...
+
+  commit:
+    needs: [build, test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download libtensorflow_graft
+        uses: actions/download-artifact@v2
+        with:
+          name: libtensorflow_graft
+
+      - name: Update bindings
+        run: |
+          rm -rf tensorflow
+          tar xzf libtensorflow_graft.tar.gz \
+            ./src/github.com/wamuir/graft/tensorflow \
+            --strip-components=5
+          rm libtensorflow_graft.tar.gz
+
+      - name: Check working tree for changes
+        id: git-status
+        run: |
+          M=$([ -n "$(git status --porcelain tensorflow)" ] && echo true || echo false)
+          echo ::set-output name=repo-changes::${M}
+
+      - name: Commit changes
+        if: ${{ steps.git-status.outputs.repo-changes == 'true' }}
+        run: |
+          git config --global user.name 'William Muir'
+          git config --global user.email 'wamuir@gmail.com'
+          git commit -am "[automated] Integrate changes from nightly build" \
+            -m "tensorflow/tensorflow@${{ needs.build.outputs.nightly-hash }}"
+          git push
