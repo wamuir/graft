@@ -1,5 +1,3 @@
-load("@rules_pkg//:pkg.bzl", "pkg_tar")
-
 package(default_visibility = ["//visibility:private"])
 
 genrule(
