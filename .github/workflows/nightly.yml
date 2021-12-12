@@ -97,6 +97,7 @@ jobs:
   commit:
     needs: [build, test]
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'schedule' }}
     steps:
       - uses: actions/checkout@v2
 
