@@ -1,5 +1,4 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
-load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
 
 package(
     default_visibility = ["//visibility:public"],
