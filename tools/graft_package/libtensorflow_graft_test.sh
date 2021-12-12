@@ -26,7 +26,7 @@ set -exo pipefail
 [ -z "${TAR}" ] && TAR=$(command -v tar)
 
 # Bazel tests run with ${PWD} set to the root of the bazel workspace
-GOTESTFILE="${PWD}/tools/graft_package/libtensorflow_graft_hello.go"
+GOTESTFILE="${PWD}/tools/graft_package/_libtensorflow_graft_hello.go"
 LIBARCHIVE="${PWD}/tools/graft_package/libtensorflow_graft.tar.gz"
 
 # Go needs GOPATH and GOCACHE set; assign a temp directory for each
