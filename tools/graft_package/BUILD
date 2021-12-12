@@ -53,7 +53,7 @@ sh_test(
     size = "small",
     srcs = ["libtensorflow_graft_test.sh"],
     data = [
-        "libtensorflow_graft_hello.go",
+        "_libtensorflow_graft_hello.go",
         ":libtensorflow_graft",
     ],
 )

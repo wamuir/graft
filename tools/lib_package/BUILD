@@ -31,7 +31,7 @@ sh_test(
     size = "small",
     srcs = ["libtensorflow_go_test.sh"],
     data = [
-        "libtensorflow_go_hello.go",
+        "_libtensorflow_go_hello.go",
         ":libtensorflow_go",
     ],
 )
