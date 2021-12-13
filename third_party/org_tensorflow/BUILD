@@ -49,6 +49,7 @@ pkg_tar(
 pkg_tar(
     name = "go_bindings",
     srcs = ["@tensorflow_go//:go_source"],
+    extension = ".tar.gz",
     mode = "0644",
     package_dir = "src/github.com/tensorflow/tensorflow/tensorflow/go",
     strip_prefix = "/external/tensorflow_go",

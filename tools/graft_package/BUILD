@@ -1,12 +1,26 @@
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
+
 package(default_visibility = ["//visibility:private"])
 
-genrule(
+pkg_tar(
     name = "libtensorflow_graft",
+    extension = ".tar.gz",
+    strip_prefix = "/",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":go_bindings",
+        "//tools/lib_package:libtensorflow",
+    ],
+)
+
+genrule(
+    name = "go_bindings",
     srcs = [
-        "//tools/lib_package:libtensorflow_go",
+        "//third_party/org_tensorflow:go_bindings",
+        "//tools/genproto:go_protos",
         "//tools/graft_package/overlay",
     ],
-    outs = ["libtensorflow_graft.tar.gz"],
+    outs = ["go_bindings.tar.gz"],
     cmd = """
 set -euo pipefail
 
@@ -14,8 +28,9 @@ set -euo pipefail
 TMP=$$(mktemp -d)
 trap "rm -rf $${TMP}" EXIT
 
-# Untar Go bindings.
-tar xzf $(location //tools/lib_package:libtensorflow_go) --directory=$${TMP}
+# Untar Go bindings and protos.
+tar xzf $(location //third_party/org_tensorflow:go_bindings) --directory=$${TMP}
+tar xzf $(location //tools/genproto:go_protos) --directory=$${TMP}
 
 # Move the bindings.
 ( \

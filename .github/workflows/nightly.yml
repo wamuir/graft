@@ -39,24 +39,14 @@ jobs:
       - name: Test
         run: bazelisk test --config=ci -- //...
 
-      - name: Build libtensorflow_go
-        run: bazelisk build --config=ci -- //tools/lib_package:libtensorflow_go
+      - name: Build Go bindings
+        run: bazelisk build --config=ci -- //tools/graft_package:go_bindings
 
-      - name: Archive libtensorflow_go
+      - name: Archive Go bindings
         uses: actions/upload-artifact@v2
         with:
-          name: libtensorflow_go
-          path: bazel-bin/tools/lib_package/libtensorflow_go.tar.gz
-          retention-days: 3
-
-      - name: Build libtensorflow_graft
-        run: bazelisk build --config=ci -- //tools/graft_package:libtensorflow_graft
-
-      - name: Archive libtensorflow_graft
-        uses: actions/upload-artifact@v2
-        with:
-          name: libtensorflow_graft
-          path: bazel-bin/tools/graft_package/libtensorflow_graft.tar.gz
+          name: go_bindings
+          path: bazel-bin/tools/graft_package/go_bindings.tar.gz
           retention-days: 3
 
   test:
@@ -73,18 +63,18 @@ jobs:
         with:
           go-version: 1
 
-      - name: Download libtensorflow_graft
+      - name: Download go_bindings
         uses: actions/download-artifact@v2
         with:
-          name: libtensorflow_graft
+          name: go_bindings
 
       - name: Update bindings
         run: |
           rm -rf tensorflow
           tar xz --strip-components=5 \
-            -f libtensorflow_graft.tar.gz \
+            -f go_bindings.tar.gz \
             ./src/github.com/wamuir/graft/tensorflow
-          rm libtensorflow_graft.tar.gz
+          rm go_bindings.tar.gz
 
       - name: Run gazelle
         run: |
@@ -101,18 +91,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Download libtensorflow_graft
+      - name: Download go_bindings
         uses: actions/download-artifact@v2
         with:
-          name: libtensorflow_graft
+          name: go_bindings
 
       - name: Update bindings
         run: |
           rm -rf tensorflow
           tar xz --strip-components=5 \
-            -f libtensorflow_graft.tar.gz \
+            -f go_bindings.tar.gz \
             ./src/github.com/wamuir/graft/tensorflow
-          rm libtensorflow_graft.tar.gz
+          rm go_bindings.tar.gz
 
       - name: Run gazelle
         run: |
