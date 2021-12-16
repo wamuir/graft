@@ -30,9 +30,10 @@ import (
 	"runtime"
 	"unsafe"
 
+	"google.golang.org/protobuf/proto"
+
 	adpb "github.com/wamuir/graft/tensorflow/core/framework/api_def_go_proto"
 	odpb "github.com/wamuir/graft/tensorflow/core/framework/op_def_go_proto"
-	"google.golang.org/protobuf/proto"
 )
 
 // Encapsulates a collection of API definitions.
@@ -50,7 +51,6 @@ type apiDefMap struct {
 // oplist is and OpList proto instance (see
 // https://www.tensorflow.org/code/tensorflow/core/framework/op_def.proto
 // for OpList proto definition).
-
 func newAPIDefMap(oplist *odpb.OpList) (*apiDefMap, error) {
 	// Create a buffer containing the serialized OpList.
 	opdefSerialized, err := proto.Marshal(oplist)

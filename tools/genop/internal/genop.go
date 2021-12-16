@@ -46,10 +46,11 @@ import (
 	"text/template"
 	"unsafe"
 
-	adpb "github.com/wamuir/graft/tensorflow/core/framework/api_def_go_proto"
-	odpb "github.com/wamuir/graft/tensorflow/core/framework/op_def_go_proto"
 	"google.golang.org/protobuf/encoding/prototext"
 	"google.golang.org/protobuf/proto"
+
+	adpb "github.com/wamuir/graft/tensorflow/core/framework/api_def_go_proto"
+	odpb "github.com/wamuir/graft/tensorflow/core/framework/op_def_go_proto"
 )
 
 // GenerateFunctionsForRegisteredOps writes a Go source code file to w
@@ -57,8 +58,7 @@ import (
 // space of the calling process.
 // apidefDirs should be a contain of directories containing api_def_*.pbtxt
 // files to load.
-func GenerateFunctionsForRegisteredOps(
-	w io.Writer, apidefs []string) error {
+func GenerateFunctionsForRegisteredOps(w io.Writer, apidefs []string) error {
 	ops, apimap, err := registeredOps()
 	if err != nil {
 		return err
@@ -96,12 +96,9 @@ func registeredOps() (*odpb.OpList, *apiDefMap, error) {
 func updateAPIDefs(m *apiDefMap, f string) error {
 	data, err := ioutil.ReadFile(f)
 	if err != nil {
-		return fmt.Errorf("failed to read %q: %v", f, err)
+		return err
 	}
-	if err = m.Put(string(data)); err != nil {
-		return fmt.Errorf("failed to process %q: %v", f, err)
-	}
-	return nil
+	return m.Put(string(data))
 }
 
 func generateFunctionsForOps(w io.Writer, ops *odpb.OpList, apimap *apiDefMap) error {
@@ -201,13 +198,13 @@ func makeOutputList(op *tf.Operation, start int, output string) ([]tf.Output, in
 `))
 
 	tmplOp = template.Must(template.New("op").Funcs(template.FuncMap{
-		"MakeComment":       makeComment,
-		"GoType":            goType,
-		"CamelCase":         camelCase,
-		"Identifier":        identifier,
-		"IsListArg":         isListArg,
-		"IsListAttr":        isListAttr,
-		"StripLeadingColon": stripLeadingColon,
+		"MakeComment":         makeComment,
+		"GoType":              goType,
+		"CamelCase":           camelCase,
+		"Identifier":          identifier,
+		"IsListArg":           isListArg,
+		"IsListAttr":          isListAttr,
+		"MarshalProtoMessage": marshalProtoMessage,
 	}).Parse(`
 {{if .OptionalAttrs -}}
 {{/* Type for specifying all optional attributes. */ -}}
@@ -220,7 +217,7 @@ type {{.Op.Name}}Attr func(optionalAttr)
 //
 // value: {{MakeComment .Description}}
 {{- end}}
-// If not specified, defaults to {{StripLeadingColon .DefaultValue}}
+// If not specified, defaults to {{MarshalProtoMessage .DefaultValue}}
 {{- if .HasMinimum}}
 //
 // {{if .IsListAttr }}REQUIRES: len(value) >= {{.Minimum}}{{else}}REQUIRES: value >= {{.Minimum}}{{end}}
@@ -561,16 +558,24 @@ func isListAttr(attrdef *odpb.OpDef_AttrDef) bool {
 	return list
 }
 
-// stripLeadingColon removes the prefix of the string up to the first colon.
-//
-// This is useful when 's' corresponds to a "oneof" protocol buffer message.
-// For example, consider the protocol buffer message:
-//   oneof value { bool b = 1;  int64 i = 2; }
-// proto.CompactTextString) will print "b:true", or "i:7" etc. This function
-// strips out the leading "b:" or "i:".
-func stripLeadingColon(m proto.Message) string {
+func marshalProtoMessage(m proto.Message) string {
+	// Marshal proto message to string.
 	o := prototext.MarshalOptions{Multiline: false}
 	x := o.Format(m)
+
+	// Remove superfluous whitespace, if present.
+	//
+	// Go protobuf output is purposefully unstable, randomly adding
+	// whitespace.  See github.com/golang/protobuf/issues/1121
+	x = strings.ReplaceAll(x, "  ", " ")
+
+	// Remove the prefix of the string up to the first colon.
+	//
+	// This is useful when 's' corresponds to a "oneof" protocol buffer
+	// message. For example, consider the protocol buffer message:
+	//   oneof value { bool b = 1;  int64 i = 2; }
+	// proto.CompactTextString) will print "b:true", or "i:7" etc. The
+	// following strips out the leading "b:" or "i:".
 	y := strings.SplitN(x, ":", 2)
 	if len(y) < 2 {
 		return x
