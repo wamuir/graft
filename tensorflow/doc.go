@@ -21,6 +21,5 @@ limitations under the License.
 // TensorFlow (www.tensorflow.org) is an open source software library for
 // numerical computation using data flow graphs. This package provides
 // functionality to build and execute such graphs and depends on
-// TensorFlow being available. For installation instructions see
-// https://github.com/tensorflow/tensorflow/blob/master/tensorflow/go/README.md
+// TensorFlow being available.
 package tensorflow
