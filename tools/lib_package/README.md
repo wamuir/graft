@@ -1,10 +1,10 @@
 ## Go library
 
-The Go library package consists of the Tensorflow [Go
-bindings](https://www.tensorflow.org/code/tensorflow/go/README.md) (module
-`github.com/tensorflow/tensorflow/tensorflow/go`) and the Tensorflow [C
+The Go library package consists of the TensorFlow [Go
+bindings](https://www.tensorflow.org/code/tensorflow/go/) (module
+`github.com/tensorflow/tensorflow/tensorflow/go`) and the TensorFlow [C
 API](https://www.tensorflow.org/code/tensorflow/c/c_api.h) that it requires.
-Dependent Go modules should use the [Go mod replace
+Dependent Go modules should use the [Go module replace
 directive](https://go.dev/ref/mod#go-mod-file-replace) to point to the local
 installation of the TensorFlow Go bindings.  The following commands:
 
