@@ -16,7 +16,7 @@ gazelle(
     name = "gazelle-update-repos",
     args = [
         "-from_file=go.mod",
-        "-to_macro=tensorflow/deps.bzl%go_dependencies",
+        "-to_macro=tensorflow/deps.bzl%_go_dependencies",
         "-prune",
     ],
     command = "update-repos",
