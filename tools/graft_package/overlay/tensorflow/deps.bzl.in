@@ -1,7 +1,38 @@
 load("@bazel_gazelle//:deps.bzl", "go_repository")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
+load("//third_party/org_tensorflow:workspace.bzl", _tf_repositories = "tf_repositories")
 
 def _go_dependencies():
     pass
 
 def graft_dependencies():
+    """Call in WORKSPACE file to load @com_github_wamuir_graft dependencies."""
+
+    maybe(
+        name = "rules_pkg",
+        repo_rule = http_archive(
+            name = "rules_pkg",
+            urls = [
+                "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/releases/download/0.5.1/rules_pkg-0.5.1.tar.gz",
+                "https://github.com/bazelbuild/rules_pkg/releases/download/0.5.1/rules_pkg-0.5.1.tar.gz",
+            ],
+            sha256 = "a89e203d3cf264e564fcb96b6e06dd70bc0557356eb48400ce4b5d97c2c3720d",
+        ),
+    )
+
+    maybe(
+        name = "com_google_protobuf",
+        repo_rule = http_archive(
+            name = "com_google_protobuf",
+            sha256 = "87407cd28e7a9c95d9f61a098a53cf031109d451a7763e7dd1253abf8b4df422",
+            strip_prefix = "protobuf-3.19.1",
+            urls = [
+                "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v3.19.1.tar.gz",
+                "https://github.com/protocolbuffers/protobuf/archive/v3.19.1.tar.gz",
+            ],
+        ),
+    )
+
     _go_dependencies()
+    _tf_repositories()
