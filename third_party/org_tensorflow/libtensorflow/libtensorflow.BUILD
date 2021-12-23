@@ -44,13 +44,29 @@ cc_import(
     visibility = ["@com_github_wamuir_graft//third_party/org_tensorflow:__pkg__"],
 )
 
+cc_import(
+    name = "tensorflow_import_lib_win",
+    interface_library = "lib/tensorflow.lib",
+    shared_library = "lib/tensorflow.dll",
+    visibility = ["@com_github_wamuir_graft//third_party/org_tensorflow:__pkg__"],
+)
+
 cc_library(
     name = "libtensorflow",
     hdrs = C_HEADERS,
     includes = ["include"],
     visibility = ["@com_github_wamuir_graft//third_party/org_tensorflow:__pkg__"],
-    deps = [
-        ":libtensorflow_framework_import_lib",
-        ":libtensorflow_import_lib",
-    ],
+    deps = select({
+        "@platforms//os:linux": [
+            ":libtensorflow_framework_import_lib",
+            ":libtensorflow_import_lib",
+        ],
+        "@platforms//os:macos": [
+            ":libtensorflow_framework_import_lib",
+            ":libtensorflow_import_lib",
+        ],
+        "@platforms//os:windows": [
+            ":libtensorflow_import_lib_win",
+        ],
+    }),
 )
