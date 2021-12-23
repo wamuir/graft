@@ -45,7 +45,7 @@ cc_import(
 )
 
 cc_import(
-    name = "tensorflow_import_lib_win",
+    name = "libtensorflow_import_lib_win",
     interface_library = "lib/tensorflow.lib",
     shared_library = "lib/tensorflow.dll",
     visibility = ["@com_github_wamuir_graft//third_party/org_tensorflow:__pkg__"],
