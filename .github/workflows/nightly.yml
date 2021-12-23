@@ -70,7 +70,7 @@ jobs:
 
       - name: Update bindings
         run: |
-          rm -rf tensorflow
+          rm -r tensorflow
           tar xz --strip-components=5 \
             -f go_bindings.tar.gz \
             ./src/github.com/wamuir/graft/tensorflow
@@ -98,7 +98,7 @@ jobs:
 
       - name: Update bindings
         run: |
-          rm -rf tensorflow
+          rm -r tensorflow
           tar xz --strip-components=5 \
             -f go_bindings.tar.gz \
             ./src/github.com/wamuir/graft/tensorflow
