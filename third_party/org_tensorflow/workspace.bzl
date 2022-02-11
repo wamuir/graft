@@ -27,6 +27,20 @@ def tf_repositories():
         inner_archive = "lib_package/libtensorflow-cpu-darwin-x86_64.tar.gz",
     )
 
+    http_embedded_archive(
+        name = "libtensorflow_windows_x86_64_cpu",
+        build_file = "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow:libtensorflow.BUILD",
+        urls = ["https://storage.googleapis.com/libtensorflow-nightly/prod/tensorflow/release/windows/latest/cpu/windows_cpu_libtensorflow_binaries.tar.gz"],
+        inner_archive = "lib_package/libtensorflow-cpu-windows-x86_64.zip",
+    )
+
+    http_embedded_archive(
+        name = "libtensorflow_windows_x86_64_gpu",
+        build_file = "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow:libtensorflow.BUILD",
+        urls = ["https://storage.googleapis.com/libtensorflow-nightly/prod/tensorflow/release/windows/latest/gpu/windows_gpu_libtensorflow_binaries.tar.gz"],
+        inner_archive = "lib_package/libtensorflow-gpu-linux-x86_64.tar.gz",
+    )
+
     ###########################################################################
     # protos
     ###########################################################################
@@ -55,6 +69,26 @@ def tf_repositories():
         patch_args = ["-p1"],
         patches = ["@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto.patch"],
         urls = ["https://storage.googleapis.com/libtensorflow-nightly/prod/tensorflow/release/macos/latest/macos_cpu_libtensorflow_binaries.tar.gz"],
+        inner_archive = "lib_package/libtensorflow_proto.zip",
+    )
+
+    # NOTE: Windows libtensorflow nightly archives do not include protos (rely instead on Linux CPU nightly archive)
+
+    http_embedded_archive(
+        name = "libtensorflow_proto_windows_x86_64_cpu",
+        build_file = "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto.BUILD",
+        patch_args = ["-p1"],
+        patches = ["@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto.patch"],
+        urls = ["https://storage.googleapis.com/libtensorflow-nightly/prod/tensorflow/release/ubuntu_16/latest/cpu/ubuntu_cpu_libtensorflow_binaries.tar.gz"],
+        inner_archive = "lib_package/libtensorflow_proto.zip",
+    )
+
+    http_embedded_archive(
+        name = "libtensorflow_proto_windows_x86_64_gpu",
+        build_file = "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto.BUILD",
+        patch_args = ["-p1"],
+        patches = ["@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto.patch"],
+        urls = ["https://storage.googleapis.com/libtensorflow-nightly/prod/tensorflow/release/ubuntu_16/latest/cpu/ubuntu_cpu_libtensorflow_binaries.tar.gz"],
         inner_archive = "lib_package/libtensorflow_proto.zip",
     )
 

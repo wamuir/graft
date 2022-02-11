@@ -2,14 +2,9 @@ common:ci --color=no
 common:ci --local_cpu_resources=2
 common:ci --local_ram_resources=4000
 common:ci --worker_max_instances=2
-build:ci --genrule_strategy=sandboxed
 build:ci --noshow_loading_progress
 build:ci --noshow_progress
-build:ci --sandbox_debug
-build:ci --spawn_strategy=sandboxed
 build:ci --subcommands
 build:ci --verbose_failures
-build:ci --worker_sandboxing
 test:ci --test_output=errors
-test:ci --test_strategy=standalone
 test:ci --test_verbose_timeout_warnings
