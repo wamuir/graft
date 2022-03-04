@@ -151,7 +151,8 @@ type SavedObject struct {
 	// Objects which this object depends on: named edges in the dependency
 	// graph.
 	//
-	// Note: currently only valid if kind == "user_object" or "resource".
+	// Note: All kinds of SavedObject may have children, except
+	// "constant" and "captured_tensor".
 	Children []*TrackableObjectGraph_TrackableObject_ObjectReference `protobuf:"bytes,1,rep,name=children,proto3" json:"children,omitempty"`
 	// Ordered list of dependencies that must be loaded before this object.
 	// SavedModel loads with the bottom-up approach, by first creating all objects

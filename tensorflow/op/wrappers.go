@@ -32540,6 +32540,35 @@ func RandomGammaGrad(scope *Scope, alpha tf.Output, sample tf.Output) (output tf
 	return op.Output(0)
 }
 
+// Outputs the position of `value` in a permutation of [0, ..., max_index].
+//
+// Output values are a bijection of the `index` for any combination and `seed` and `max_index`.
+//
+// If multiple inputs are vectors (matrix in case of seed) then the size of the
+// first dimension must match.
+//
+// The outputs are deterministic.
+//
+// Arguments:
+//	index: A scalar tensor or a vector of dtype `dtype`. The index (or indices) to be shuffled. Must be within [0, max_index].
+//	seed: A tensor of dtype `Tseed` and shape [3] or [n, 3]. The random seed.
+//	max_index: A scalar tensor or vector of dtype `dtype`. The upper bound(s) of the interval (inclusive).
+//
+// Returns A scalar tensor of dtype `dtype`, within [0, max_index]. The randomly shuffled index.
+func RandomIndexShuffle(scope *Scope, index tf.Output, seed tf.Output, max_index tf.Output) (output tf.Output) {
+	if scope.Err() != nil {
+		return
+	}
+	opspec := tf.OpSpec{
+		Type: "RandomIndexShuffle",
+		Input: []tf.Input{
+			index, seed, max_index,
+		},
+	}
+	op := scope.AddOperation(opspec)
+	return op.Output(0)
+}
+
 // RandomPoissonAttr is an optional argument to RandomPoisson.
 type RandomPoissonAttr func(optionalAttr)
 
@@ -38963,10 +38992,10 @@ func ScalarSummary(scope *Scope, tags tf.Output, values tf.Output) (summary tf.O
 // inverse of the `tf.gather_nd` operator which extracts values or slices from a
 // given tensor.
 //
-// This operation is similar to `tf.tensor_scatter_add`, except that the tensor is
-// zero-initialized. Calling `tf.scatter_nd(indices, values, shape)`
+// This operation is similar to `tf.tensor_scatter_nd_add`, except that the tensor
+// is zero-initialized. Calling `tf.scatter_nd(indices, values, shape)`
 // is identical to calling
-// `tf.tensor_scatter_add(tf.zeros(shape, values.dtype), indices, values)`.
+// `tf.tensor_scatter_nd_add(tf.zeros(shape, values.dtype), indices, values)`
 //
 // If `indices` contains duplicates, the duplicate `values` are accumulated
 // (summed).
@@ -48885,40 +48914,40 @@ func TensorMapStackKeys(scope *Scope, input_handle tf.Output, key_dtype tf.DataT
 //
 // This operation creates a new tensor by adding sparse `updates` to the passed
 // in `tensor`.
-// This operation is very similar to `tf.compat.v1.scatter_nd_add`, except that the updates
-// are added onto an existing tensor (as opposed to a variable). If the memory
-// for the existing tensor cannot be re-used, a copy is made and updated.
+// This operation is very similar to `tf.compat.v1.scatter_nd_add`, except that the
+// updates are added onto an existing tensor (as opposed to a variable). If the
+// memory for the existing tensor cannot be re-used, a copy is made and updated.
 //
 // `indices` is an integer tensor containing indices into a new tensor of shape
 // `tensor.shape`.  The last dimension of `indices` can be at most the rank of
 // `tensor.shape`:
 //
-//     indices.shape[-1] <= tensor.shape.rank
+// ```
+// indices.shape[-1] <= tensor.shape.rank
+// ```
 //
 // The last dimension of `indices` corresponds to indices into elements
 // (if `indices.shape[-1] = tensor.shape.rank`) or slices
 // (if `indices.shape[-1] < tensor.shape.rank`) along dimension
 // `indices.shape[-1]` of `tensor.shape`.  `updates` is a tensor with shape
 //
-//     indices.shape[:-1] + tensor.shape[indices.shape[-1]:]
+// ```
+// indices.shape[:-1] + tensor.shape[indices.shape[-1]:]
+// ```
 //
-// The simplest form of tensor_scatter_add is to add individual elements to a
+// The simplest form of `tensor_scatter_nd_add` is to add individual elements to a
 // tensor by index. For example, say we want to add 4 elements in a rank-1
 // tensor with 8 elements.
 //
 // In Python, this scatter add operation would look like this:
 //
-// ```python
-//     indices = tf.constant([[4], [3], [1], [7]])
-//     updates = tf.constant([9, 10, 11, 12])
-//     tensor = tf.ones([8], dtype=tf.int32)
-//     updated = tf.tensor_scatter_nd_add(tensor, indices, updates)
-//     print(updated)
-// ```
-//
-// The resulting tensor would look like this:
-//
-//     [1, 12, 1, 11, 10, 1, 1, 13]
+// >>> indices = tf.constant([[4], [3], [1], [7]])
+// >>> updates = tf.constant([9, 10, 11, 12])
+// >>> tensor = tf.ones([8], dtype=tf.int32)
+// >>> updated = tf.tensor_scatter_nd_add(tensor, indices, updates)
+// >>> updated
+// <tf.Tensor: shape=(8,), dtype=int32,
+// numpy=array([ 1, 12,  1, 11, 10,  1,  1, 13], dtype=int32)>
 //
 // We can also, insert entire slices of a higher rank tensor all at once. For
 // example, if we wanted to insert two slices in the first dimension of a
@@ -48926,25 +48955,21 @@ func TensorMapStackKeys(scope *Scope, input_handle tf.Output, key_dtype tf.DataT
 //
 // In Python, this scatter add operation would look like this:
 //
-// ```python
-//     indices = tf.constant([[0], [2]])
-//     updates = tf.constant([[[5, 5, 5, 5], [6, 6, 6, 6],
-//                             [7, 7, 7, 7], [8, 8, 8, 8]],
-//                            [[5, 5, 5, 5], [6, 6, 6, 6],
-//                             [7, 7, 7, 7], [8, 8, 8, 8]]])
-//     tensor = tf.ones([4, 4, 4],dtype=tf.int32)
-//     updated = tf.tensor_scatter_nd_add(tensor, indices, updates)
-//     print(updated)
-// ```
+// >>> indices = tf.constant([[0], [2]])
+// >>> updates = tf.constant([[[5, 5, 5, 5], [6, 6, 6, 6],
+// ...                         [7, 7, 7, 7], [8, 8, 8, 8]],
+// ...                        [[5, 5, 5, 5], [6, 6, 6, 6],
+// ...                         [7, 7, 7, 7], [8, 8, 8, 8]]])
+// >>> tensor = tf.ones([4, 4, 4],dtype=tf.int32)
+// >>> updated = tf.tensor_scatter_nd_add(tensor, indices, updates)
+// >>> updated
+// <tf.Tensor: shape=(4, 4, 4), dtype=int32,
+// numpy=array([[[6, 6, 6, 6], [7, 7, 7, 7], [8, 8, 8, 8], [9, 9, 9, 9]],
+//              [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]],
+//              [[6, 6, 6, 6], [7, 7, 7, 7], [8, 8, 8, 8], [9, 9, 9, 9]],
+//              [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]]], dtype=int32)>
 //
-// The resulting tensor would look like this:
-//
-//     [[[6, 6, 6, 6], [7, 7, 7, 7], [8, 8, 8, 8], [9, 9, 9, 9]],
-//      [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]],
-//      [[6, 6, 6, 6], [7, 7, 7, 7], [8, 8, 8, 8], [9, 9, 9, 9]],
-//      [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]]]
-//
-// Note that on CPU, if an out of bound index is found, an error is returned.
+// Note: on CPU, if an out of bound index is found, an error is returned.
 // On GPU, if an out of bound index is found, the index is ignored.
 //
 // Arguments:
