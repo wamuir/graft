@@ -12,4 +12,5 @@ build:ci --verbose_failures
 build:ci --worker_sandboxing
 test:ci --test_output=errors
 test:ci --test_strategy=standalone
+test:ci --test_timeout=300
 test:ci --test_verbose_timeout_warnings
