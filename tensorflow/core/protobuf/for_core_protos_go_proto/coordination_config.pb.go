@@ -38,7 +38,7 @@ type CoordinationServiceConfig struct {
 	EnableHealthCheck bool `protobuf:"varint,3,opt,name=enable_health_check,json=enableHealthCheck,proto3" json:"enable_health_check,omitempty"`
 	// Maximum wait time for all members in the cluster to be registered.
 	ClusterRegisterTimeoutInMs int64 `protobuf:"varint,4,opt,name=cluster_register_timeout_in_ms,json=clusterRegisterTimeoutInMs,proto3" json:"cluster_register_timeout_in_ms,omitempty"`
-	// Heartbeat timeout, if a worker does not record heartbeat in this time
+	// Heartbeat timeout, if a task does not record heartbeat in this time
 	// window, it will be considered disconnected.
 	HeartbeatTimeoutInMs int64 `protobuf:"varint,5,opt,name=heartbeat_timeout_in_ms,json=heartbeatTimeoutInMs,proto3" json:"heartbeat_timeout_in_ms,omitempty"`
 	// The list of jobs that partipate in the coordination service. If empty, all
