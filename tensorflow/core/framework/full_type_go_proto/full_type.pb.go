@@ -20,6 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// LINT.IfChange
 // Experimental. Represents the complete type information of a TensorFlow value.
 type FullTypeId int32
 
