@@ -9,6 +9,7 @@ go_library(
         "config.pb.go",
         "control_flow.pb.go",
         "coordination_config.pb.go",
+        "core_platform_payloads.pb.go",
         "data_service.pb.go",
         "debug.pb.go",
         "debug_event.pb.go",
