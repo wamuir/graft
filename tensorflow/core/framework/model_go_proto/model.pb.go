@@ -233,7 +233,7 @@ type ModelProto_Node struct {
 	BytesProduced int64 `protobuf:"varint,7,opt,name=bytes_produced,json=bytesProduced,proto3" json:"bytes_produced,omitempty"`
 	// The number of elements produced by the node.
 	NumElements int64 `protobuf:"varint,8,opt,name=num_elements,json=numElements,proto3" json:"num_elements,omitempty"`
-	// The aggregate processing time spent in this node.
+	// The aggregate processing time spent in this node in nanoseconds.
 	ProcessingTime int64 `protobuf:"varint,9,opt,name=processing_time,json=processingTime,proto3" json:"processing_time,omitempty"`
 	// An indication whether this node records metrics about produced and
 	// consumed elements.
