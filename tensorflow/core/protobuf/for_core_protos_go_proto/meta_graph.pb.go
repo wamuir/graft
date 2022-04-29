@@ -25,9 +25,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// NOTE: This protocol buffer is evolving, and will go through revisions in the
-// coming months.
-//
 // Protocol buffer containing the following which are necessary to restart
 // training, run inference. It can be used to serialize/de-serialize memory
 // objects necessary for running computation in a graph when crossing the
