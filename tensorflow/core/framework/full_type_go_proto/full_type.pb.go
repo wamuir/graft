@@ -370,7 +370,7 @@ type FullTypeDef struct {
 	// symbol (Any, Union). See FullTypeId for details.
 	TypeId FullTypeId     `protobuf:"varint,1,opt,name=type_id,json=typeId,proto3,enum=tensorflow.FullTypeId" json:"type_id,omitempty"`
 	Args   []*FullTypeDef `protobuf:"bytes,2,rep,name=args,proto3" json:"args,omitempty"`
-	// Literal values of this type object, if the the type admits one.
+	// Literal values of this type object, if the type admits one.
 	// For example, a type variable admits a string attribute - its name.
 	// Shape-related types may admit int attributes - their static shape values.
 	// Fields for more data types to be added as needed.
