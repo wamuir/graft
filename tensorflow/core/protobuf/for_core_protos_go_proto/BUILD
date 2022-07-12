@@ -17,6 +17,7 @@ go_library(
         "device_properties.pb.go",
         "distributed_runtime_payloads.pb.go",
         "error_codes.pb.go",
+        "fingerprint.pb.go",
         "graph_debug_info.pb.go",
         "meta_graph.pb.go",
         "named_tensor.pb.go",
