@@ -21591,6 +21591,37 @@ func LinSpace(scope *Scope, start tf.Output, stop tf.Output, num tf.Output) (out
 	return op.Output(0)
 }
 
+// ListDatasetAttr is an optional argument to ListDataset.
+type ListDatasetAttr func(optionalAttr)
+
+// ListDatasetMetadata sets the optional metadata attribute to value.
+// If not specified, defaults to ""
+func ListDatasetMetadata(value string) ListDatasetAttr {
+	return func(m optionalAttr) {
+		m["metadata"] = value
+	}
+}
+
+// Creates a dataset that emits each of `tensors` once.
+func ListDataset(scope *Scope, tensors []tf.Output, output_types []tf.DataType, output_shapes []tf.Shape, optional ...ListDatasetAttr) (handle tf.Output) {
+	if scope.Err() != nil {
+		return
+	}
+	attrs := map[string]interface{}{"output_types": output_types, "output_shapes": output_shapes}
+	for _, a := range optional {
+		a(attrs)
+	}
+	opspec := tf.OpSpec{
+		Type: "ListDataset",
+		Input: []tf.Input{
+			tf.OutputList(tensors),
+		},
+		Attrs: attrs,
+	}
+	op := scope.AddOperation(opspec)
+	return op.Output(0)
+}
+
 // ListDiffAttr is an optional argument to ListDiff.
 type ListDiffAttr func(optionalAttr)
 
@@ -26108,6 +26139,16 @@ func MergeV2CheckpointsDeleteOldDirs(value bool) MergeV2CheckpointsAttr {
 	}
 }
 
+// MergeV2CheckpointsAllowMissingFiles sets the optional allow_missing_files attribute to value.
+//
+// value: see above.
+// If not specified, defaults to false
+func MergeV2CheckpointsAllowMissingFiles(value bool) MergeV2CheckpointsAttr {
+	return func(m optionalAttr) {
+		m["allow_missing_files"] = value
+	}
+}
+
 // V2 format specific: merges the metadata files of sharded checkpoints.  The
 //
 // result is one logical checkpoint, with one physical metadata file and renamed
@@ -26118,6 +26159,10 @@ func MergeV2CheckpointsDeleteOldDirs(value bool) MergeV2CheckpointsAttr {
 // If delete_old_dirs is true, attempts to delete recursively the dirname of each
 // path in the input checkpoint_prefixes.  This is useful when those paths are non
 // user-facing temporary locations.
+//
+// If allow_missing_files is true, merges the checkpoint prefixes as long as
+// at least one file exists. Otherwise, if no files exist, an error will be thrown.
+// The default value for allow_missing_files is false.
 //
 // Arguments:
 //
@@ -55262,6 +55307,71 @@ func XlaBroadcastHelper(scope *Scope, lhs tf.Output, rhs tf.Output, broadcast_di
 	}
 	op := scope.AddOperation(opspec)
 	return op.Output(0), op.Output(1)
+}
+
+// Temporary op for experimenting with jax2tf.
+//
+// DO NOT USE THIS OP. It has no backwards compatibility guarantees. It is also
+// very likely to change. This op will be used only in jax2tf under an
+// experimental flag.
+//
+// This is an experimental op to allow a smooth evolution of jax2tf towards
+// emitting and serializing MHLO directly from JAX. At the moment this op
+// carries a serialized MHLO module, therefore there are no backward-compatibility
+// guarantees, and should not be used for serialization.
+// Eventually, the op will carry a MHLO object, which will have
+// backwards-compatibility guarantees.
+//
+// The serialized module must return a tuple if and only if the Sout is an empty
+// list or a list with more than 1 elements. The length of Tout and Sout must
+// match. This op always returns a tuple of results, even if the module returns
+// a single result.
+//
+// The handling of dynamic shapes is work-in-progress. At the moment, the
+// JAX lowering for dynamic shapes will prepend one dimension parameter to the
+// serialized module for each dimension whose value must be passed in.
+// The "args" correspond to the non-dimension arguments. During compilation
+// we compute the values of the dimension arguments based on the static shapes of
+// the "args". In order to do this, we encode for each dimension argument a
+// specification of how to compute its value, as a string, in the form
+// "<arg_idx>.<axis_idx>".
+// E.g., the specification "2.1" denotes the value args[2].shape[1].
+//
+// Arguments:
+//
+//	args: A list of `Tensor` with possibly different types to be passed as arguments
+//
+// to the HLO module.
+//
+//	module: A serialized computation, a text representation of mlir.Module.
+//	Sout: List of output tensor shapes.
+//	Tout: List of output tensor data types.
+//	dim_args_spec: the specification for the dimension arguments, one for each
+//
+// dimension argument. In absence of dynamic shapes this list is empty.
+func XlaCallModule(scope *Scope, args []tf.Output, module string, Sout []tf.Shape, Tout []tf.DataType, dim_args_spec []string) (output []tf.Output) {
+	if scope.Err() != nil {
+		return
+	}
+	attrs := map[string]interface{}{"module": module, "Sout": Sout, "Tout": Tout, "dim_args_spec": dim_args_spec}
+	opspec := tf.OpSpec{
+		Type: "XlaCallModule",
+		Input: []tf.Input{
+			tf.OutputList(args),
+		},
+		Attrs: attrs,
+	}
+	op := scope.AddOperation(opspec)
+	if scope.Err() != nil {
+		return
+	}
+	var idx int
+	var err error
+	if output, idx, err = makeOutputList(op, idx, "output"); err != nil {
+		scope.UpdateErr("XlaCallModule", err)
+		return
+	}
+	return output
 }
 
 // XlaConcatNDAttr is an optional argument to XlaConcatND.
