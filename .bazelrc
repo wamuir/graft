@@ -7,4 +7,6 @@ build:ci --noshow_progress
 build:ci --subcommands
 build:ci --verbose_failures
 test:ci --test_output=errors
+test:ci --test_strategy=standalone
+test:ci --test_timeout=300
 test:ci --test_verbose_timeout_warnings

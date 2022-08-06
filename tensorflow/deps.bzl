@@ -19,8 +19,8 @@ def _go_dependencies():
     go_repository(
         name = "org_golang_google_protobuf",
         importpath = "google.golang.org/protobuf",
-        sum = "h1:SnqbnDw1V7RiZcXPx5MEeqPv2s79L9i7BJUlG/+RurQ=",
-        version = "v1.27.1",
+        sum = "h1:d0NfwRgPtno5B1Wa6L2DAG+KivqkdutMf1UhdNx175w=",
+        version = "v1.28.1",
     )
     go_repository(
         name = "org_golang_x_xerrors",
@@ -36,11 +36,11 @@ def graft_dependencies():
         name = "rules_pkg",
         repo_rule = http_archive(
             name = "rules_pkg",
+            sha256 = "8a298e832762eda1830597d64fe7db58178aa84cd5926d76d5b744d6558941c2",
             urls = [
-                "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/releases/download/0.5.1/rules_pkg-0.5.1.tar.gz",
-                "https://github.com/bazelbuild/rules_pkg/releases/download/0.5.1/rules_pkg-0.5.1.tar.gz",
+                "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/releases/download/0.7.0/rules_pkg-0.7.0.tar.gz",
+                "https://github.com/bazelbuild/rules_pkg/releases/download/0.7.0/rules_pkg-0.7.0.tar.gz",
             ],
-            sha256 = "a89e203d3cf264e564fcb96b6e06dd70bc0557356eb48400ce4b5d97c2c3720d",
         ),
     )
 
@@ -48,11 +48,11 @@ def graft_dependencies():
         name = "com_google_protobuf",
         repo_rule = http_archive(
             name = "com_google_protobuf",
-            sha256 = "87407cd28e7a9c95d9f61a098a53cf031109d451a7763e7dd1253abf8b4df422",
-            strip_prefix = "protobuf-3.19.1",
+            sha256 = "990e47a163b4057f98b899eca591981b5b735872b58f59b9ead9cecabbb21a2a",
+            strip_prefix = "protobuf-21.4",
             urls = [
-                "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v3.19.1.tar.gz",
-                "https://github.com/protocolbuffers/protobuf/archive/v3.19.1.tar.gz",
+                "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v21.4.tar.gz",
+                "https://github.com/protocolbuffers/protobuf/archive/v21.4.tar.gz",
             ],
         ),
     )

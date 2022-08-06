@@ -1,6 +1,6 @@
 # Graft
-[![tensorflow version](https://img.shields.io/badge/tf-v2.8.0--nightly-FF6F00?logo=tensorflow&logoColor=FF6F00)](https://github.com/tensorflow/tensorflow/tree/nightly)
-[![nightly](https://img.shields.io/github/workflow/status/wamuir/graft/nightly?label=nightly%20ci&logo=github&event=schedule)](https://github.com/wamuir/graft/actions/workflows/nightly.yml)
+[![tensorflow version](https://img.shields.io/badge/tf-v2.11.0--nightly-FF6F00?logo=tensorflow&logoColor=FF6F00)](https://github.com/tensorflow/tensorflow/tree/nightly)
+[![nightly](https://img.shields.io/github/workflow/status/wamuir/graft/nightly/main?label=nightly%20ci&logo=github&event=schedule)](https://github.com/wamuir/graft/actions/workflows/nightly.yml?query=branch%3Amain)
 [![go.dev reference](https://pkg.go.dev/badge/wamuir/graft)](https://pkg.go.dev/github.com/wamuir/graft/tensorflow)
 
 ## About
@@ -8,11 +8,11 @@
 **Go language bindings to the TensorFlow C API**
 
 Graft contains nightly and release builds of the Go language bindings to the
-TensorFlow C API, including builds of generated Go code for TensorFlow protobuf
-definitions and API wrappers.
+TensorFlow C API, including Go-compiled TensorFlow protocol buffers and
+generated Go wrappers for TensorFlow operations.
 
 Use Graft exactly as you would use the Go bindings found in the main TensorFlow
-repo, except use the import statement `github.com/wamuir/graft/tensorflow`.
+repo, and with the following import statement: `github.com/wamuir/graft/tensorflow`
 
 ## Getting Started
 
