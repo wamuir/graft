@@ -1,5 +1,5 @@
 ---
-name: nightly
+name: test
 
 on:
   push:
@@ -10,8 +10,6 @@ on:
     branches:
       - 'main'
       - 'r[0-9]+.[0-9]+'
-  schedule:
-    - cron: '00 18 * * *'
   workflow_dispatch:
 
 env:
@@ -21,8 +19,6 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    outputs:
-      nightly-hash: ${{ steps.lsh-remote.outputs.nightly-hash }}
     steps:
       - uses: actions/checkout@v2
 
@@ -30,12 +26,6 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1
-
-      - name: Get commit hash
-        id: lsh-remote
-        run: |
-          H=$(git ls-remote -h https://github.com/tensorflow/tensorflow nightly)
-          echo ::set-output name=nightly-hash::$(echo ${H} | awk '{ print $1 }')
 
       - name: Log Bazel version
         run: bazelisk version
@@ -87,44 +77,3 @@ jobs:
 
       - name: Test bindings
         run: bazelisk test --config=ci -- //tensorflow/...
-
-  commit:
-    needs: [build, test]
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'schedule' }}
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Download go_bindings
-        uses: actions/download-artifact@v2
-        with:
-          name: go_bindings
-
-      - name: Update bindings
-        run: |
-          rm -rf tensorflow
-          tar xz --strip-components=5 \
-            -f go_bindings.tar.gz \
-            ./src/github.com/wamuir/graft/tensorflow
-          rm go_bindings.tar.gz
-
-      - name: Run gazelle
-        run: |
-          bazelisk run //:gazelle
-          bazelisk run //:gazelle-update-repos
-
-      - name: Check working tree for changes
-        id: git-status
-        run: |
-          M=$([ -n "$(git status --porcelain tensorflow)" ] && echo true || echo false)
-          echo ::set-output name=repo-changes::${M}
-
-      - name: Commit changes
-        if: ${{ steps.git-status.outputs.repo-changes == 'true' }}
-        run: |
-          git config --global user.name 'William Muir'
-          git config --global user.email 'wamuir@gmail.com'
-          git add tensorflow/
-          git commit -m "[automated] Integrate changes from nightly build" \
-            -m "tensorflow/tensorflow@${{ needs.build.outputs.nightly-hash }}"
-          git push
