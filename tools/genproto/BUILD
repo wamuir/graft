@@ -4,7 +4,7 @@ genrule(
     name = "go_protos",
     srcs = [
         "//tools/lib_package:libtensorflow_proto",
-        "@com_google_protobuf//:well_known_protos",
+        "@com_google_protobuf//:well_known_type_protos",
     ],
     outs = ["go_protos.tar.gz"],
     cmd = """
@@ -15,7 +15,7 @@ TMP=$$(mktemp -d)
 trap "rm -rf $${TMP}" EXIT
 
 # Untar well-known protobufs.
-tar cf - $(locations @com_google_protobuf//:well_known_protos) \
+tar cf - $(locations @com_google_protobuf//:well_known_type_protos) \
   | tar x --directory=$${TMP}
 
 # Untar TensorFlow core protobufs.
