@@ -3,9 +3,13 @@ name: nightly
 
 on:
   push:
-    branches: [main]
+    branches:
+      - 'main'
+      - 'r[0-9]+.[0-9]+]'
   pull_request:
-    branches: [main]
+    branches:
+      - 'main'
+      - 'r[0-9]+.[0-9]+]'
   schedule:
     - cron: '00 18 * * *'
   workflow_dispatch:
