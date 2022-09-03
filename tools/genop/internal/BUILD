@@ -18,8 +18,8 @@ go_library(
     deps = [
         "//tensorflow/core/framework/api_def_go_proto",
         "//tensorflow/core/framework/op_def_go_proto",
-        "@org_golang_google_protobuf//encoding/prototext",
-        "@org_golang_google_protobuf//proto",
+        "@org_golang_google_protobuf//encoding/prototext:go_default_library",
+        "@org_golang_google_protobuf//proto:go_default_library",
     ],
 )
 
@@ -31,7 +31,7 @@ go_test(
     deps = [
         "//tensorflow/core/framework/api_def_go_proto",
         "//tensorflow/core/framework/op_def_go_proto",
-        "@org_golang_google_protobuf//encoding/prototext",
+        "@org_golang_google_protobuf//encoding/prototext:go_default_library",
     ],
 )
 
