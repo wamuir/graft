@@ -64,10 +64,8 @@ jobs:
 
       - name: Update bindings
         run: |
-          rm -rf tensorflow
-          tar xz --strip-components=5 \
-            -f go_bindings.tar.gz \
-            ./src/github.com/wamuir/graft/tensorflow
+          rm -r tensorflow
+          tar -xzf go_bindings.tar.gz --strip-components 5 ./src/github.com/wamuir/graft/tensorflow
           rm go_bindings.tar.gz
 
       - name: Run gazelle
