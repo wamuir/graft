@@ -35,6 +35,7 @@ go_library(
         "tensorflow_server.pb.go",
         "trackable_object_graph.pb.go",
         "transport_options.pb.go",
+        "uniform_quant_ops_attr.pb.go",
         "verifier_config.pb.go",
     ],
     importpath = "github.com/wamuir/graft/tensorflow/core/protobuf/for_core_protos_go_proto",
