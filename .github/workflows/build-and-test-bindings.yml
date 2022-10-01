@@ -47,7 +47,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -64,10 +64,8 @@ jobs:
 
       - name: Update bindings
         run: |
-          rm -rf tensorflow
-          tar xz --strip-components=5 \
-            -f go_bindings.tar.gz \
-            ./src/github.com/wamuir/graft/tensorflow
+          rm -r tensorflow
+          tar -xzf go_bindings.tar.gz --strip-components 5 ./src/github.com/wamuir/graft/tensorflow
           rm go_bindings.tar.gz
 
       - name: Run gazelle
