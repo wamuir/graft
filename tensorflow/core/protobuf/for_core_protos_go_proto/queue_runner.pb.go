@@ -7,6 +7,7 @@
 package for_core_protos_go_proto
 
 import (
+	for_core_protos_go_proto "github.com/wamuir/graft/tensorflow/tsl/protobuf/for_core_protos_go_proto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -36,7 +37,7 @@ type QueueRunnerDef struct {
 	CancelOpName string `protobuf:"bytes,4,opt,name=cancel_op_name,json=cancelOpName,proto3" json:"cancel_op_name,omitempty"`
 	// A list of exception types considered to signal a safely closed queue
 	// if raised during enqueue operations.
-	QueueClosedExceptionTypes []Code `protobuf:"varint,5,rep,packed,name=queue_closed_exception_types,json=queueClosedExceptionTypes,proto3,enum=tensorflow.error.Code" json:"queue_closed_exception_types,omitempty"`
+	QueueClosedExceptionTypes []for_core_protos_go_proto.Code `protobuf:"varint,5,rep,packed,name=queue_closed_exception_types,json=queueClosedExceptionTypes,proto3,enum=tensorflow.error.Code" json:"queue_closed_exception_types,omitempty"`
 }
 
 func (x *QueueRunnerDef) Reset() {
@@ -99,7 +100,7 @@ func (x *QueueRunnerDef) GetCancelOpName() string {
 	return ""
 }
 
-func (x *QueueRunnerDef) GetQueueClosedExceptionTypes() []Code {
+func (x *QueueRunnerDef) GetQueueClosedExceptionTypes() []for_core_protos_go_proto.Code {
 	if x != nil {
 		return x.QueueClosedExceptionTypes
 	}
@@ -157,8 +158,8 @@ func file_tensorflow_core_protobuf_queue_runner_proto_rawDescGZIP() []byte {
 
 var file_tensorflow_core_protobuf_queue_runner_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_tensorflow_core_protobuf_queue_runner_proto_goTypes = []interface{}{
-	(*QueueRunnerDef)(nil), // 0: tensorflow.QueueRunnerDef
-	(Code)(0),              // 1: tensorflow.error.Code
+	(*QueueRunnerDef)(nil),             // 0: tensorflow.QueueRunnerDef
+	(for_core_protos_go_proto.Code)(0), // 1: tensorflow.error.Code
 }
 var file_tensorflow_core_protobuf_queue_runner_proto_depIdxs = []int32{
 	1, // 0: tensorflow.QueueRunnerDef.queue_closed_exception_types:type_name -> tensorflow.error.Code

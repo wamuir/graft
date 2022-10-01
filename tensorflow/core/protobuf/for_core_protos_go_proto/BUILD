@@ -52,6 +52,7 @@ go_library(
         "//tensorflow/core/framework/types_go_proto",
         "//tensorflow/core/framework/variable_go_proto",
         "//tensorflow/core/framework/versions_go_proto",
+        "//tensorflow/tsl/protobuf/for_core_protos_go_proto",
         "@org_golang_google_protobuf//reflect/protoreflect:go_default_library",
         "@org_golang_google_protobuf//runtime/protoimpl:go_default_library",
         "@org_golang_google_protobuf//types/known/anypb:go_default_library",
