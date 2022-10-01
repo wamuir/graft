@@ -33,7 +33,10 @@ def tf_repositories():
         name = "libtensorflow_proto_linux_x86_64_cpu",
         build_file = "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto.BUILD",
         patch_args = ["-p1"],
-        patches = ["@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto.patch"],
+        patches = [
+            "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto.patch",
+            "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto_tsl.patch",
+        ],
         urls = ["https://storage.googleapis.com/libtensorflow-nightly/latest/libtensorflow_proto.zip"],
     )
 
@@ -41,7 +44,10 @@ def tf_repositories():
         name = "libtensorflow_proto_linux_x86_64_gpu",
         build_file = "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto.BUILD",
         patch_args = ["-p1"],
-        patches = ["@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto.patch"],
+        patches = [
+            "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto.patch",
+            "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto_tsl.patch",
+        ],
         urls = ["https://storage.googleapis.com/libtensorflow-nightly/latest/libtensorflow_proto.zip"],
     )
 
@@ -49,7 +55,10 @@ def tf_repositories():
         name = "libtensorflow_proto_macos_x86_64_cpu",
         build_file = "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto.BUILD",
         patch_args = ["-p1"],
-        patches = ["@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto.patch"],
+        patches = [
+            "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto.patch",
+            "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto_tsl.patch",
+        ],
         urls = ["https://storage.googleapis.com/libtensorflow-nightly/latest/libtensorflow_proto.zip"],
     )
 
