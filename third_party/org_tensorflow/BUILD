@@ -1,4 +1,5 @@
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
+load("//third_party/org_tensorflow:version.bzl", "VERSION_MAJOR", "VERSION_MINOR", "VERSION_PATCH")
 
 package(
     default_visibility = ["//visibility:private"],
@@ -21,7 +22,6 @@ pkg_tar(
         "//tools/conditions:linux_x86_64_gpu": ["@libtensorflow_proto_linux_x86_64_gpu//:protos_all_proto_srcs"],
         "//tools/conditions:macos_x86_64_cpu": ["@libtensorflow_proto_macos_x86_64_cpu//:protos_all_proto_srcs"],
     }),
-    extension = ".tar.gz",
     strip_prefix = select({
         "//tools/conditions:linux_x86_64_cpu": "/external/libtensorflow_proto_linux_x86_64_cpu",
         "//tools/conditions:linux_x86_64_gpu": "/external/libtensorflow_proto_linux_x86_64_gpu",
@@ -33,11 +33,30 @@ pkg_tar(
 pkg_tar(
     name = "libtensorflow_pkg",
     srcs = select({
-        "//tools/conditions:linux_x86_64_cpu": ["@libtensorflow_linux_x86_64_cpu//:all_files"],
-        "//tools/conditions:linux_x86_64_gpu": ["@libtensorflow_linux_x86_64_gpu//:all_files"],
-        "//tools/conditions:macos_x86_64_cpu": ["@libtensorflow_macos_x86_64_cpu//:all_files"],
+        "//tools/conditions:linux_x86_64_cpu": ["@libtensorflow_linux_x86_64_cpu//:pkg_files"],
+        "//tools/conditions:linux_x86_64_gpu": ["@libtensorflow_linux_x86_64_gpu//:pkg_files"],
+        "//tools/conditions:macos_x86_64_cpu": ["@libtensorflow_macos_x86_64_cpu//:pkg_files"],
     }),
-    extension = ".tar.gz",
+    symlinks = select({
+        "//tools/conditions:linux_x86_64_cpu": {
+		"lib/libtensorflow.so": "libtensorflow.so.%s" % VERSION_MAJOR,
+		"lib/libtensorflow_framework.so": "libtensorflow_framework.so.%s" % VERSION_MAJOR,
+		"lib/libtensorflow.so.%s" % VERSION_MAJOR: "libtensorflow.so.%s.%s.%s" % (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH),
+		"lib/libtensorflow_framework.so.%s" % VERSION_MAJOR: "libtensorflow_framework.so.%s.%s.%s" % (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH),
+	},
+        "//tools/conditions:linux_x86_64_gpu": {
+		"lib/libtensorflow.so": "libtensorflow.so.%s" % VERSION_MAJOR,
+		"lib/libtensorflow_framework.so": "libtensorflow_framework.so.%s" % VERSION_MAJOR,
+		"lib/libtensorflow.so.%s" % VERSION_MAJOR: "libtensorflow.so.%s.%s.%s" % (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH),
+		"lib/libtensorflow_framework.so.%s" % VERSION_MAJOR: "libtensorflow_framework.so.%s.%s.%s" % (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH),
+	},
+        "//tools/conditions:macos_x86_64_cpu": {
+		"lib/libtensorflow.dylib": "libtensorflow.%s.dylib" % VERSION_MAJOR,
+		"lib/libtensorflow_framework.dylib": "libtensorflow_framework.%s.dylib" % VERSION_MAJOR,
+		"lib/libtensorflow.%s.dylib" % VERSION_MAJOR: "libtensorflow.%s.%s.%s.dylib" % (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH),
+		"lib/libtensorflow_framework.%s.dylib" % VERSION_MAJOR: "libtensorflow_framework.%s.%s.%s.dylib" % (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH),
+	},
+    }),
     strip_prefix = select({
         "//tools/conditions:linux_x86_64_cpu": "/external/libtensorflow_linux_x86_64_cpu",
         "//tools/conditions:linux_x86_64_gpu": "/external/libtensorflow_linux_x86_64_gpu",
@@ -49,7 +68,6 @@ pkg_tar(
 pkg_tar(
     name = "go_bindings",
     srcs = ["@tensorflow_go//:go_source"],
-    extension = ".tar.gz",
     mode = "0644",
     package_dir = "src/github.com/tensorflow/tensorflow/tensorflow/go",
     strip_prefix = "/external/tensorflow_go",
