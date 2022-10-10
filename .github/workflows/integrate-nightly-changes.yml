@@ -42,7 +42,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: go_bindings
-          path: bazel-bin/tools/graft_package/go_bindings.tar.gz
+          path: bazel-bin/tools/graft_package/go_bindings.tar
           retention-days: 3
 
   test:
@@ -67,10 +67,10 @@ jobs:
       - name: Update bindings
         run: |
           rm -rf tensorflow
-          tar xz --strip-components=5 \
-            -f go_bindings.tar.gz \
+          tar x --strip-components=5 \
+            -f go_bindings.tar \
             ./src/github.com/wamuir/graft/tensorflow
-          rm go_bindings.tar.gz
+          rm go_bindings.tar
 
       - name: Run gazelle
         run: |
@@ -94,10 +94,10 @@ jobs:
       - name: Update bindings
         run: |
           rm -rf tensorflow
-          tar xz --strip-components=5 \
-            -f go_bindings.tar.gz \
+          tar x --strip-components=5 \
+            -f go_bindings.tar \
             ./src/github.com/wamuir/graft/tensorflow
-          rm go_bindings.tar.gz
+          rm go_bindings.tar
 
       - name: Run gazelle
         run: |

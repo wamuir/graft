@@ -10,6 +10,7 @@ def tf_repositories():
         name = "libtensorflow_linux_x86_64_cpu",
         build_file = "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow:libtensorflow.BUILD",
         urls = ["https://storage.googleapis.com/libtensorflow-nightly/latest/libtensorflow-cpu-linux-x86_64.tar.gz"],
+	sha256 = "f44e0574c6ec1912d99517e3734e11f684df367ea564529330cf07c7d58f0f19",
     )
 
     http_archive(

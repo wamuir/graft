@@ -27,14 +27,14 @@ set -exo pipefail
 
 # Bazel tests run with ${PWD} set to the root of the bazel workspace
 GOTESTFILE="${PWD}/tools/graft_package/_libtensorflow_graft_hello.go"
-LIBARCHIVE="${PWD}/tools/graft_package/libtensorflow_graft.tar.gz"
+LIBARCHIVE="${PWD}/tools/graft_package/libtensorflow_graft.tar"
 
 # Go needs GOPATH and GOCACHE set; assign a temp directory for each
 export GOPATH="$(mktemp --directory --tmpdir="${TEST_TMPDIR}")"
 export GOCACHE="$(mktemp --directory --tmpdir="${TEST_TMPDIR}")"
 
 # Extract the libtensorflow_go archive into GOPATH
-${TAR} -xzf "${LIBARCHIVE}" -C"${GOPATH}"
+${TAR} -xf "${LIBARCHIVE}" -C"${GOPATH}"
 (
   cd "${GOPATH}/src/github.com/wamuir/graft" \
   && ${GO} mod init github.com/wamuir/graft \

@@ -4,7 +4,6 @@ package(default_visibility = ["//visibility:private"])
 
 pkg_tar(
     name = "libtensorflow_graft",
-    extension = ".tar.gz",
     strip_prefix = "/",
     visibility = ["//visibility:public"],
     deps = [
@@ -20,7 +19,7 @@ genrule(
         "//tools/genproto:go_protos",
         "//tools/graft_package/overlay",
     ],
-    outs = ["go_bindings.tar.gz"],
+    outs = ["go_bindings.tar"],
     cmd = """
 set -euo pipefail
 
@@ -29,8 +28,8 @@ TMP=$$(mktemp -d)
 trap "rm -rf $${TMP}" EXIT
 
 # Untar Go bindings and protos.
-tar xzf $(location //third_party/org_tensorflow:go_bindings) --directory=$${TMP}
-tar xzf $(location //tools/genproto:go_protos) --directory=$${TMP}
+tar xf $(location //third_party/org_tensorflow:go_bindings) --directory=$${TMP}
+tar xf $(location //tools/genproto:go_protos) --directory=$${TMP}
 
 # Move the bindings.
 ( \
@@ -55,7 +54,7 @@ find $${TMP}/src/github.com/wamuir/graft/tensorflow -type f -name '*.go' -print0
 
 
 # Tar bindings.
-tar czf $@ --mtime='UTC 1970-01-01' -C $${TMP} .
+tar cf $@ --mtime='UTC 1970-01-01' -C $${TMP} .
 """,
     tags = ["manual"],
     visibility = ["//visibility:public"],

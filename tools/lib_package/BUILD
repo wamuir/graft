@@ -16,7 +16,6 @@ alias(
 
 pkg_tar(
     name = "libtensorflow_go",
-    extension = ".tar.gz",
     strip_prefix = "/",
     visibility = ["//visibility:public"],
     deps = [

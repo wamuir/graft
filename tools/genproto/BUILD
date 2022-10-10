@@ -6,7 +6,7 @@ genrule(
         "//tools/lib_package:libtensorflow_proto",
         "@com_google_protobuf//:well_known_type_protos",
     ],
-    outs = ["go_protos.tar.gz"],
+    outs = ["go_protos.tar"],
     cmd = """
 set -euo pipefail
 
@@ -20,7 +20,7 @@ tar cf - $(locations @com_google_protobuf//:well_known_type_protos) \
 
 # Untar TensorFlow core protobufs.
 mkdir -p $${TMP}/external/libtensorflow_proto
-tar xzf $(location //tools/lib_package:libtensorflow_proto) \
+tar xf $(location //tools/lib_package:libtensorflow_proto) \
   --directory=$${TMP}/external/libtensorflow_proto
 
 # Generated Go code will be written to tensorflow/src.
@@ -35,7 +35,7 @@ find $${TMP}/external/libtensorflow_proto/tensorflow -name "*.proto" \
     --proto_path=$${TMP}/external/libtensorflow_proto
 
 # Tar generated Go code.
-tar czf $@ --mtime='UTC 1970-01-01' -C $${TMP}/tensorflow src
+tar cf $@ --mtime='UTC 1970-01-01' -C $${TMP}/tensorflow src
 """,
     exec_tools = [
         "@org_golang_google_protobuf//cmd/protoc-gen-go",
