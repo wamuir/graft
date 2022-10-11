@@ -14,21 +14,6 @@ ALL_FILES = glob(
     ],
 )
 
-SYMLINKS = select({
-        "@platforms//os:linux": [
-		"BUILD.bazel",
-		"WORKSPACE",
-		"libtensorflow.so",
-		"libtensorflow.so.%s" % VERSION_MAJOR,
-		"libtensorflow_framework.so",
-		"libtensorflow_framework.so.%s" % VERSION_MAJOR,
-	],
-        "@platforms//os:macos": [
-		"BUILD.bazel",
-		"WORKSPACE",
-	],
-    })
-
 # exclude symlinks (symlinks not preserved by rule_pkg)
 # github.com/bazelbuild/rules_pkg/issues/115
 PKG_FILES = glob(
