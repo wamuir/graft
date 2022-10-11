@@ -1,5 +1,5 @@
 diff --git a/tensorflow/tsl/protobuf/error_codes.proto b/tensorflow/tsl/protobuf/error_codes.proto
-index c873d55..c77b281 100644
+index c873d55..44c7fc7 100644
 --- a/tensorflow/tsl/protobuf/error_codes.proto
 +++ b/tensorflow/tsl/protobuf/error_codes.proto
 @@ -9,7 +9,7 @@ option cc_enable_arenas = true;
@@ -11,3 +11,16 @@ index c873d55..c77b281 100644
  
  // The canonical error codes for TensorFlow APIs.
  //
+diff --git a/tensorflow/tsl/protobuf/histogram.proto b/tensorflow/tsl/protobuf/histogram.proto
+index 2a5f6d9..ccc8f7a 100644
+--- a/tensorflow/tsl/protobuf/histogram.proto
++++ b/tensorflow/tsl/protobuf/histogram.proto
+@@ -5,7 +5,7 @@ package tensorflow;
+ option cc_enable_arenas = true;
+ option java_multiple_files = true;
+ option java_package = "org.tensorflow.framework";
+-option go_package = "github.com/google/tsl/tsl/go/core/protobuf/summary_go_proto";
++option go_package = "github.com/tensorflow/tensorflow/tensorflow/go/tsl/protobuf/for_core_protos_go_proto";
+ 
+ // Serialization format for histogram module in
+ // tsl/lib/histogram/histogram.h
