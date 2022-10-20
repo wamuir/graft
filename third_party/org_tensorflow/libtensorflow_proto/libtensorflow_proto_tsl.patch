@@ -1,3 +1,16 @@
+diff --git a/tensorflow/tsl/protobuf/bfc_memory_map.proto b/tensorflow/tsl/protobuf/bfc_memory_map.proto
+index bca45cb..e5d482f 100644
+--- a/tensorflow/tsl/protobuf/bfc_memory_map.proto
++++ b/tensorflow/tsl/protobuf/bfc_memory_map.proto
+@@ -2,7 +2,7 @@ syntax = "proto3";
+ 
+ package tensorflow;
+ 
+-option go_package = "github.com/google/tsl/tsl/go/protobuf/for_core_protos_go_proto";
++option go_package = "github.com/tensorflow/tensorflow/tensorflow/go/tsl/protobuf/for_core_protos_go_proto";
+ 
+ // Some of the data from AllocatorStats
+ message MemAllocatorStats {
 diff --git a/tensorflow/tsl/protobuf/error_codes.proto b/tensorflow/tsl/protobuf/error_codes.proto
 index c873d55..44c7fc7 100644
 --- a/tensorflow/tsl/protobuf/error_codes.proto
