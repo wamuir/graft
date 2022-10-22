@@ -2010,13 +2010,10 @@ type ConfigProto_Experimental struct {
 	// GraphDef must be passed in a single call to Session::Create(), and
 	// Session::Extend() may not be supported.
 	OptimizeForStaticGraph bool `protobuf:"varint,12,opt,name=optimize_for_static_graph,json=optimizeForStaticGraph,proto3" json:"optimize_for_static_graph,omitempty"`
-	// This field will eventually be deprecated and replaced by
-	// mlir_bridge_rollout (b/166038521).
+	// Whether to enable the MLIR-based TF->XLA bridge. This is only used if set
+	// to true. Default value or false is ignored. Use mlir_bridge_rollout for
+	// finer control.
 	//
-	// Whether to enable the MLIR-based TF->XLA bridge.
-	//
-	// This is a replacement to the existing bridge, and not ready for
-	// production usage yet.
 	// If this option is set to true when a session is created, MLIR is used to
 	// perform the set of graph transformations to put the graph in a form that
 	// can be executed with delegation of some computations to an accelerator.
@@ -2025,9 +2022,6 @@ type ConfigProto_Experimental struct {
 	// to an "execute" operation. The kernel for these operations is responsible
 	// to lower the encapsulated graph to a particular device.
 	EnableMlirBridge bool `protobuf:"varint,13,opt,name=enable_mlir_bridge,json=enableMlirBridge,proto3" json:"enable_mlir_bridge,omitempty"`
-	// This field is underdevelopment, for now use enable_mlir_bridge
-	// (b/166038521).
-	//
 	// Whether to enable the MLIR-based TF->XLA bridge.
 	MlirBridgeRollout ConfigProto_Experimental_MlirBridgeRollout `protobuf:"varint,17,opt,name=mlir_bridge_rollout,json=mlirBridgeRollout,proto3,enum=tensorflow.ConfigProto_Experimental_MlirBridgeRollout" json:"mlir_bridge_rollout,omitempty"`
 	// Whether to enable the MLIR-based Graph optimizations.
