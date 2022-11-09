@@ -111,7 +111,7 @@ jobs:
           echo "repo-changes=${M}" >> $GITHUB_OUTPUT
 
       - name: Commit changes
-        if: ${{ env.repo-changes == 'true' }}
+        if: ${{ steps.git-status.outputs.repo-changes == 'true' }}
         run: |
           git config --global user.name 'William Muir'
           git config --global user.email 'wamuir@gmail.com'
