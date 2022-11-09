@@ -16,10 +16,10 @@ jobs:
     outputs:
       nightly-hash: ${{ steps.lsh-remote.outputs.nightly-hash }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
           go-version: 1
 
@@ -27,7 +27,7 @@ jobs:
         id: lsh-remote
         run: |
           H=$(git ls-remote -h https://github.com/tensorflow/tensorflow nightly)
-          echo ::set-output name=nightly-hash::$(echo ${H} | awk '{ print $1 }')
+          echo "nightly-hash=$(echo ${H} | awk '{ print $1 }')" >> $GITHUB_OUTPUT
 
       - name: Log Bazel version
         run: bazelisk version
@@ -39,7 +39,7 @@ jobs:
         run: bazelisk build --config=ci -- //tools/graft_package:go_bindings
 
       - name: Archive Go bindings
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: go_bindings
           path: bazel-bin/tools/graft_package/go_bindings.tar
@@ -52,15 +52,15 @@ jobs:
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
           go-version: 1
 
       - name: Download go_bindings
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: go_bindings
 
@@ -84,10 +84,10 @@ jobs:
     needs: [build, test]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Download go_bindings
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: go_bindings
 
@@ -108,10 +108,10 @@ jobs:
         id: git-status
         run: |
           M=$([ -n "$(git status --porcelain tensorflow)" ] && echo true || echo false)
-          echo ::set-output name=repo-changes::${M}
+          echo "repo-changes=${M}" >> $GITHUB_OUTPUT
 
       - name: Commit changes
-        if: ${{ steps.git-status.outputs.repo-changes == 'true' }}
+        if: ${{ env.repo-changes == 'true' }}
         run: |
           git config --global user.name 'William Muir'
           git config --global user.email 'wamuir@gmail.com'

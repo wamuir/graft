@@ -20,10 +20,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
           go-version: 1
 
@@ -37,7 +37,7 @@ jobs:
         run: bazelisk build --config=ci -- //tools/graft_package:go_bindings
 
       - name: Archive Go bindings
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: go_bindings
           path: bazel-bin/tools/graft_package/go_bindings.tar
@@ -50,15 +50,15 @@ jobs:
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
           go-version: 1
 
       - name: Download go_bindings
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: go_bindings
 
