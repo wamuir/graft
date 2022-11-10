@@ -23,6 +23,7 @@ go_library(
         "queue_runner.pb.go",
         "remote_tensor_handle.pb.go",
         "rewriter_config.pb.go",
+        "rpc_options.pb.go",
         "saved_model.pb.go",
         "saved_object_graph.pb.go",
         "saver.pb.go",

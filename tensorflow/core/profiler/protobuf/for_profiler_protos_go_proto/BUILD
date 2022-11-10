@@ -6,6 +6,7 @@ go_library(
     importpath = "github.com/wamuir/graft/tensorflow/core/profiler/protobuf/for_profiler_protos_go_proto",
     visibility = ["//visibility:public"],
     deps = [
+        "//tensorflow/tsl/profiler/protobuf/for_profiler_protos_go_proto",
         "@org_golang_google_protobuf//reflect/protoreflect:go_default_library",
         "@org_golang_google_protobuf//runtime/protoimpl:go_default_library",
     ],
