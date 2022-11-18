@@ -12,8 +12,8 @@ def tf_repositories():
         patch_args = ["-p1"],
         patches = [],
         strip_prefix = "",
-        urls = ["https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-linux-x86_64-2.10.0.tar.gz"],
-        sha256 = "141631c8bcebb469ba5fa7bc8032f0324df2a7dea469f842318bafe0322850ab",
+        urls = ["https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-linux-x86_64-2.10.1.tar.gz"],
+        sha256 = "201fb4f0e612c3e6f0ef9b6415efa23072eadda37de1c8a901fd196042f05a3e",
     )
 
     http_archive(
@@ -22,8 +22,8 @@ def tf_repositories():
         patch_args = ["-p1"],
         patches = [],
         strip_prefix = "",
-        urls = ["https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-gpu-linux-x86_64-2.10.0.tar.gz"],
-        sha256 = "327f55f544dd57b9e89d5fd416b91be8686640cc90b1970bd47d4d65fc9f143f",
+        urls = ["https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-gpu-linux-x86_64-2.10.1.tar.gz"],
+        sha256 = "5e8efbd334526d922413018b8890aeeb78470abd3612ee248aa8eb34014aad05",
     )
 
     http_archive(
@@ -32,8 +32,8 @@ def tf_repositories():
         patch_args = ["-p1"],
         patches = [],
         strip_prefix = "",
-        urls = ["https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-darwin-x86_64-2.10.0.tar.gz"],
-        sha256 = "f2f42881c363da1aa70702ef64905dad7f90dfa0c5f1f37758e3babd695c8ca3",
+        urls = ["https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-darwin-x86_64-2.10.1.tar.gz"],
+        sha256 = "f4a3c7f9fe861edc9e628e7bcf9ac29307885ac19bc562c93889decc2e7e144c",
     )
 
     ###########################################################################
@@ -46,8 +46,8 @@ def tf_repositories():
         patch_args = ["-p1"],
         patches = ["@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto.patch"],
         strip_prefix = "",
-        urls = ["https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow_proto-2.10.0.zip"],
-        sha256 = "63fdb8b428aabfefc1a0b061f12c927358f4a5d19d6f3891c32c0843c6957bb4",
+        urls = ["https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow_proto-2.10.1.zip"],
+        sha256 = "a4991bf55f5ef4d06b8004a0c446c4314911548da597c64f054085e59ef2677f",
     )
 
     http_archive(
@@ -56,8 +56,8 @@ def tf_repositories():
         patch_args = ["-p1"],
         patches = ["@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto.patch"],
         strip_prefix = "",
-        urls = ["https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow_proto-2.10.0.zip"],
-        sha256 = "63fdb8b428aabfefc1a0b061f12c927358f4a5d19d6f3891c32c0843c6957bb4",
+        urls = ["https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow_proto-2.10.1.zip"],
+        sha256 = "a4991bf55f5ef4d06b8004a0c446c4314911548da597c64f054085e59ef2677f",
     )
 
     http_archive(
@@ -66,8 +66,8 @@ def tf_repositories():
         patch_args = ["-p1"],
         patches = ["@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow_proto:libtensorflow_proto.patch"],
         strip_prefix = "",
-        urls = ["https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow_proto-2.10.0.zip"],
-        sha256 = "63fdb8b428aabfefc1a0b061f12c927358f4a5d19d6f3891c32c0843c6957bb4",
+        urls = ["https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow_proto-2.10.1.zip"],
+        sha256 = "a4991bf55f5ef4d06b8004a0c446c4314911548da597c64f054085e59ef2677f",
     )
 
     ###########################################################################
@@ -79,9 +79,9 @@ def tf_repositories():
         build_file = "@com_github_wamuir_graft//third_party/org_tensorflow/tensorflow_base_api_def:tensorflow_base_api_def.BUILD",
         patch_args = ["-p1"],
         patches = [],
-        strip_prefix = "tensorflow-2.10.0/tensorflow/core/api_def/base_api",
-        urls = ["https://github.com/tensorflow/tensorflow/archive/refs/tags/v2.10.0.tar.gz"],
-        sha256 = "b5a1bb04c84b6fe1538377e5a1f649bb5d5f0b2e3625a3c526ff3a8af88633e8",
+        strip_prefix = "tensorflow-2.10.1/tensorflow/core/api_def/base_api",
+        urls = ["https://github.com/tensorflow/tensorflow/archive/refs/tags/v2.10.1.tar.gz"],
+        sha256 = "622a92e22e6f3f4300ea43b3025a0b6122f1cc0e2d9233235e4c628c331a94a3",
     )
 
     ###########################################################################
@@ -93,7 +93,7 @@ def tf_repositories():
         build_file = "@com_github_wamuir_graft//third_party/org_tensorflow/tensorflow_go:tensorflow_go.BUILD",
         patch_args = ["-p1"],
         patches = [],
-        strip_prefix = "tensorflow-2.10.0/tensorflow/go",
-        urls = ["https://github.com/tensorflow/tensorflow/archive/refs/tags/v2.10.0.tar.gz"],
-        sha256 = "b5a1bb04c84b6fe1538377e5a1f649bb5d5f0b2e3625a3c526ff3a8af88633e8",
+        strip_prefix = "tensorflow-2.10.1/tensorflow/go",
+        urls = ["https://github.com/tensorflow/tensorflow/archive/refs/tags/v2.10.1.tar.gz"],
+        sha256 = "622a92e22e6f3f4300ea43b3025a0b6122f1cc0e2d9233235e4c628c331a94a3",
     )
