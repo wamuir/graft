@@ -11,6 +11,19 @@ index 9dfd03b..2ccc425 100644
  option cc_enable_arenas = true;
  
  // This file contains protocol buffers for working with tf.data Datasets.
+diff --git a/tensorflow/core/framework/optimized_function_graph.proto b/tensorflow/core/framework/optimized_function_graph.proto
+index d3a1c47..b08d845 100644
+--- a/tensorflow/core/framework/optimized_function_graph.proto
++++ b/tensorflow/core/framework/optimized_function_graph.proto
+@@ -5,6 +5,8 @@ package tensorflow;
+ import "tensorflow/core/framework/graph.proto";
+ import "tensorflow/core/framework/types.proto";
+ 
++option go_package = "github.com/tensorflow/tensorflow/tensorflow/go/core/framework/optimized_function_graph_go_proto";
++
+ // Optimized function graph after instantiation-related graph optimization
+ // passes (up till before graph partitioning). The first half of the proto is
+ // representing a GraphDef and the rest of the fields are extra information from
 diff --git a/tensorflow/core/grappler/costs/op_performance_data.proto b/tensorflow/core/grappler/costs/op_performance_data.proto
 index 5ef5fd9..c3e3ed7 100644
 --- a/tensorflow/core/grappler/costs/op_performance_data.proto
