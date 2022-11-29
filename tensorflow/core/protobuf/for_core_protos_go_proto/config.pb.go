@@ -262,9 +262,9 @@ type GPUOptions struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Fraction of the available GPU memory to allocate for each process.
+	// Fraction of the total GPU memory to allocate for each process.
 	// 1 means to allocate all of the GPU memory, 0.5 means the process
-	// allocates up to ~50% of the available GPU memory.
+	// allocates up to ~50% of the total GPU memory.
 	//
 	// GPU memory is pre-allocated unless the allow_growth option is enabled.
 	//
