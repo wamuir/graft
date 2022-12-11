@@ -13,10 +13,10 @@ def graft_dependencies():
         name = "rules_pkg",
         repo_rule = http_archive(
             name = "rules_pkg",
-            sha256 = "8a298e832762eda1830597d64fe7db58178aa84cd5926d76d5b744d6558941c2",
+            sha256 = "eea0f59c28a9241156a47d7a8e32db9122f3d50b505fae0f33de6ce4d9b61834",
             urls = [
-                "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/releases/download/0.7.0/rules_pkg-0.7.0.tar.gz",
-                "https://github.com/bazelbuild/rules_pkg/releases/download/0.7.0/rules_pkg-0.7.0.tar.gz",
+                "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/releases/download/0.8.0/rules_pkg-0.8.0.tar.gz",
+                "https://github.com/bazelbuild/rules_pkg/releases/download/0.8.0/rules_pkg-0.8.0.tar.gz",
             ],
         ),
     )
@@ -25,11 +25,11 @@ def graft_dependencies():
         name = "com_google_protobuf",
         repo_rule = http_archive(
             name = "com_google_protobuf",
-            sha256 = "4a7e87e4166c358c63342dddcde6312faee06ea9d5bb4e2fa87d3478076f6639",
-            strip_prefix = "protobuf-21.5",
+            sha256 = "b1d6dd2cbb5d87e17af41cadb720322ce7e13af826268707bd8db47e5654770b",
+            strip_prefix = "protobuf-21.11",
             urls = [
-                "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v21.5.tar.gz",
-                "https://github.com/protocolbuffers/protobuf/archive/v21.5.tar.gz",
+                "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v21.11.tar.gz",
+                "https://github.com/protocolbuffers/protobuf/archive/v21.11.tar.gz",
             ],
         ),
     )
