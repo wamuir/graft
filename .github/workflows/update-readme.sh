@@ -15,7 +15,7 @@ README=$(awk 'NR>4' README.md)
 cat << EOF > README.md
 # Graft
 [![tensorflow version](https://img.shields.io/badge/tf-v${TF_VERSION}-FF6F00?logo=tensorflow&logoColor=FF6F00)](https://github.com/tensorflow/tensorflow/tree/v${TF_VERSION})
-[![build](https://img.shields.io/github/workflow/status/wamuir/graft/test/${BRANCH}?label=build&logo=github)](https://github.com/wamuir/graft/actions/workflows/test.yml?query=branch%3A${BRANCH})
+[![build](https://img.shields.io/github/actions/workflow/status/wamuir/graft/build-and-test-bindings.yml?branch=${BRANCH}&label=build&logo=github)](https://github.com/wamuir/graft/actions/workflows/test.yml?query=branch%3A${BRANCH})
 [![go.dev reference](https://pkg.go.dev/badge/wamuir/graft)](https://pkg.go.dev/github.com/wamuir/graft/tensorflow)
 EOF
 printf "%s\n" "${README}" >> README.md
