@@ -82,4 +82,6 @@ def tf_repositories():
         build_file = "@com_github_wamuir_graft//third_party/org_tensorflow/tensorflow_go:tensorflow_go.BUILD",
         strip_prefix = "tensorflow-nightly/tensorflow/go",
         urls = ["https://github.com/tensorflow/tensorflow/archive/refs/heads/nightly.tar.gz"],
+        patch_args = ["-p1"],
+        patches = ["@com_github_wamuir_graft//third_party/org_tensorflow/tensorflow_go:tensorflow_go_op.patch"],
     )

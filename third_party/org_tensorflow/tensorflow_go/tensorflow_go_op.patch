@@ -1,0 +1,14 @@
+diff --git a/op/BUILD b/op/BUILD
+index b873efc..5c484ae 100644
+--- a/op/BUILD
++++ b/op/BUILD
+@@ -1 +1,9 @@
+ # Empty file to be replaced in https://github.com/tensorflow/tensorflow/pull/50934
++
++ALL_FILES = glob(["**/*"])
++
++filegroup(
++    name = "all_files",
++    srcs = ALL_FILES,
++    visibility = ["//visibility:public"],
++)

@@ -13,7 +13,7 @@ GO_SOURCE = glob(
         "BUILD.bazel",
         "WORKSPACE",
     ],
-)
+) + ["//op:all_files"]
 
 filegroup(
     name = "go_source",
