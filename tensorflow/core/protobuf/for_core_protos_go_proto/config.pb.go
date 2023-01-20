@@ -1919,7 +1919,8 @@ type ConfigProto_Experimental struct {
 	// If set, this can be used by the runtime and the Ops for debugging,
 	// monitoring, etc.
 	//
-	// NOTE: This is currently used and propagated only by the direct session.
+	// NOTE: This is currently used and propagated only by the direct session
+	// and EagerContext.
 	SessionMetadata *SessionMetadata `protobuf:"bytes,11,opt,name=session_metadata,json=sessionMetadata,proto3" json:"session_metadata,omitempty"`
 	// If true, the session may treat the graph as being static for optimization
 	// purposes.
