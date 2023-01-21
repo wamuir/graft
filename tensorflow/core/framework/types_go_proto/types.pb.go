@@ -53,8 +53,8 @@ const (
 	DataType_DT_VARIANT       DataType = 21 // Arbitrary C++ data types
 	DataType_DT_UINT32        DataType = 22
 	DataType_DT_UINT64        DataType = 23
-	DataType_DT_FLOAT8_E5M2   DataType = 24 // 5 exponent bits, 3 mantissa bits.
-	DataType_DT_FLOAT8_E4M3FN DataType = 25 // 4 exponent bits, 2 mantissa bits, finite-only, with
+	DataType_DT_FLOAT8_E5M2   DataType = 24 // 5 exponent bits, 2 mantissa bits.
+	DataType_DT_FLOAT8_E4M3FN DataType = 25 // 4 exponent bits, 3 mantissa bits, finite-only, with
 	// Do not use!  These are only for parameters.  Every enum above
 	// should have a corresponding value below (verified by types_test).
 	DataType_DT_FLOAT_REF         DataType = 101
