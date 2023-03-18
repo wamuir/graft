@@ -8,6 +8,7 @@ go_library(
         "error_codes.pb.go",
         "histogram.pb.go",
         "rpc_options.pb.go",
+        "status.pb.go",
         "test_log.pb.go",
     ],
     importpath = "github.com/wamuir/graft/tensorflow/tsl/protobuf/for_core_protos_go_proto",

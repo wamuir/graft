@@ -29,6 +29,7 @@ go_library(
         "saver.pb.go",
         "service_config.pb.go",
         "snapshot.pb.go",
+        "status.pb.go",
         "struct.pb.go",
         "tensor_bundle.pb.go",
         "tensorflow_server.pb.go",
