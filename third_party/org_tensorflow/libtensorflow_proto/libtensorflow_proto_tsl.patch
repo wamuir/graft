@@ -89,6 +89,19 @@ index 35c5dbe..621244e 100644
  
  // RPC options for distributed runtime.
  message RPCOptions {
+diff --git a/tensorflow/tsl/protobuf/status.proto b/tensorflow/tsl/protobuf/status.proto
+index 30daf99..0642243 100644
+--- a/tensorflow/tsl/protobuf/status.proto
++++ b/tensorflow/tsl/protobuf/status.proto
+@@ -7,7 +7,7 @@ import "tensorflow/tsl/protobuf/error_codes.proto";
+ option cc_enable_arenas = true;
+ option java_multiple_files = true;
+ option java_package = "org.tensorflow.framework";
+-option go_package = "github.com/google/tsl/tsl/go/protobuf/for_core_protos_go_proto";
++option go_package = "github.com/tensorflow/tensorflow/tensorflow/go/tsl/protobuf/for_core_protos_go_proto";
+ 
+ // Wire-format for Status.
+ // Next tag: 3
 diff --git a/tensorflow/tsl/protobuf/test_log.proto b/tensorflow/tsl/protobuf/test_log.proto
 index 6d3af02..323b1bb 100644
 --- a/tensorflow/tsl/protobuf/test_log.proto
