@@ -129,6 +129,8 @@ EOF
 http_archive "tensorflow_go" \
     "@com_github_wamuir_graft//third_party/org_tensorflow/tensorflow_go:tensorflow_go.BUILD" \
     "-p1" \
-    "[]" \
+    "[
+            \"@com_github_wamuir_graft//third_party/org_tensorflow/tensorflow_go:tensorflow_go_op.patch\",
+        ]" \
     "tensorflow-${TF_VERSION}/tensorflow/go" \
     "https://github.com/tensorflow/tensorflow/archive/refs/tags/v${TF_VERSION}.tar.gz"
