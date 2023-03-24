@@ -37,30 +37,30 @@ pkg_tar(
         "//tools/conditions:linux_x86_64_gpu": ["@libtensorflow_linux_x86_64_gpu//:pkg_files"],
         "//tools/conditions:macos_x86_64_cpu": ["@libtensorflow_macos_x86_64_cpu//:pkg_files"],
     }),
-    symlinks = select({
-        "//tools/conditions:linux_x86_64_cpu": {
-		"lib/libtensorflow.so": "libtensorflow.so.%s" % VERSION_MAJOR,
-		"lib/libtensorflow_framework.so": "libtensorflow_framework.so.%s" % VERSION_MAJOR,
-		"lib/libtensorflow.so.%s" % VERSION_MAJOR: "libtensorflow.so.%s.%s.%s" % (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH),
-		"lib/libtensorflow_framework.so.%s" % VERSION_MAJOR: "libtensorflow_framework.so.%s.%s.%s" % (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH),
-	},
-        "//tools/conditions:linux_x86_64_gpu": {
-		"lib/libtensorflow.so": "libtensorflow.so.%s" % VERSION_MAJOR,
-		"lib/libtensorflow_framework.so": "libtensorflow_framework.so.%s" % VERSION_MAJOR,
-		"lib/libtensorflow.so.%s" % VERSION_MAJOR: "libtensorflow.so.%s.%s.%s" % (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH),
-		"lib/libtensorflow_framework.so.%s" % VERSION_MAJOR: "libtensorflow_framework.so.%s.%s.%s" % (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH),
-	},
-        "//tools/conditions:macos_x86_64_cpu": {
-		"lib/libtensorflow.dylib": "libtensorflow.%s.dylib" % VERSION_MAJOR,
-		"lib/libtensorflow_framework.dylib": "libtensorflow_framework.%s.dylib" % VERSION_MAJOR,
-		"lib/libtensorflow.%s.dylib" % VERSION_MAJOR: "libtensorflow.%s.%s.%s.dylib" % (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH),
-		"lib/libtensorflow_framework.%s.dylib" % VERSION_MAJOR: "libtensorflow_framework.%s.%s.%s.dylib" % (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH),
-	},
-    }),
     strip_prefix = select({
         "//tools/conditions:linux_x86_64_cpu": "/external/libtensorflow_linux_x86_64_cpu",
         "//tools/conditions:linux_x86_64_gpu": "/external/libtensorflow_linux_x86_64_gpu",
         "//tools/conditions:macos_x86_64_cpu": "/external/libtensorflow_macos_x86_64_cpu",
+    }),
+    symlinks = select({
+        "//tools/conditions:linux_x86_64_cpu": {
+            "lib/libtensorflow.so": "libtensorflow.so.%s" % VERSION_MAJOR,
+            "lib/libtensorflow_framework.so": "libtensorflow_framework.so.%s" % VERSION_MAJOR,
+            "lib/libtensorflow.so.%s" % VERSION_MAJOR: "libtensorflow.so.%s.%s.%s" % (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH),
+            "lib/libtensorflow_framework.so.%s" % VERSION_MAJOR: "libtensorflow_framework.so.%s.%s.%s" % (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH),
+        },
+        "//tools/conditions:linux_x86_64_gpu": {
+            "lib/libtensorflow.so": "libtensorflow.so.%s" % VERSION_MAJOR,
+            "lib/libtensorflow_framework.so": "libtensorflow_framework.so.%s" % VERSION_MAJOR,
+            "lib/libtensorflow.so.%s" % VERSION_MAJOR: "libtensorflow.so.%s.%s.%s" % (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH),
+            "lib/libtensorflow_framework.so.%s" % VERSION_MAJOR: "libtensorflow_framework.so.%s.%s.%s" % (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH),
+        },
+        "//tools/conditions:macos_x86_64_cpu": {
+            "lib/libtensorflow.dylib": "libtensorflow.%s.dylib" % VERSION_MAJOR,
+            "lib/libtensorflow_framework.dylib": "libtensorflow_framework.%s.dylib" % VERSION_MAJOR,
+            "lib/libtensorflow.%s.dylib" % VERSION_MAJOR: "libtensorflow.%s.%s.%s.dylib" % (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH),
+            "lib/libtensorflow_framework.%s.dylib" % VERSION_MAJOR: "libtensorflow_framework.%s.%s.%s.dylib" % (VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH),
+        },
     }),
     visibility = ["//:__subpackages__"],
 )
