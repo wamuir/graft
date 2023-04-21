@@ -7,6 +7,7 @@
 package for_core_protos_go_proto
 
 import (
+	graph_debug_info_proto "github.com/wamuir/graft/tensorflow/core/framework/graph_debug_info_proto"
 	tensor_go_proto "github.com/wamuir/graft/tensorflow/core/framework/tensor_go_proto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -483,7 +484,7 @@ type StackFrameWithId struct {
 	// Stack frame, i.e., a frame of a stack trace, containing information
 	// regarding the file name, line number, function name, code content
 	// of the line, and column number (if available).
-	FileLineCol *GraphDebugInfo_FileLineCol `protobuf:"bytes,2,opt,name=file_line_col,json=fileLineCol,proto3" json:"file_line_col,omitempty"`
+	FileLineCol *graph_debug_info_proto.GraphDebugInfo_FileLineCol `protobuf:"bytes,2,opt,name=file_line_col,json=fileLineCol,proto3" json:"file_line_col,omitempty"`
 }
 
 func (x *StackFrameWithId) Reset() {
@@ -525,7 +526,7 @@ func (x *StackFrameWithId) GetId() string {
 	return ""
 }
 
-func (x *StackFrameWithId) GetFileLineCol() *GraphDebugInfo_FileLineCol {
+func (x *StackFrameWithId) GetFileLineCol() *graph_debug_info_proto.GraphDebugInfo_FileLineCol {
 	if x != nil {
 		return x.FileLineCol
 	}
@@ -1313,19 +1314,19 @@ func file_tensorflow_core_protobuf_debug_event_proto_rawDescGZIP() []byte {
 var file_tensorflow_core_protobuf_debug_event_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_tensorflow_core_protobuf_debug_event_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_tensorflow_core_protobuf_debug_event_proto_goTypes = []interface{}{
-	(TensorDebugMode)(0),                // 0: tensorflow.TensorDebugMode
-	(*DebugEvent)(nil),                  // 1: tensorflow.DebugEvent
-	(*DebugMetadata)(nil),               // 2: tensorflow.DebugMetadata
-	(*SourceFile)(nil),                  // 3: tensorflow.SourceFile
-	(*StackFrameWithId)(nil),            // 4: tensorflow.StackFrameWithId
-	(*CodeLocation)(nil),                // 5: tensorflow.CodeLocation
-	(*GraphOpCreation)(nil),             // 6: tensorflow.GraphOpCreation
-	(*DebuggedGraph)(nil),               // 7: tensorflow.DebuggedGraph
-	(*DebuggedDevice)(nil),              // 8: tensorflow.DebuggedDevice
-	(*Execution)(nil),                   // 9: tensorflow.Execution
-	(*GraphExecutionTrace)(nil),         // 10: tensorflow.GraphExecutionTrace
-	(*GraphDebugInfo_FileLineCol)(nil),  // 11: tensorflow.GraphDebugInfo.FileLineCol
-	(*tensor_go_proto.TensorProto)(nil), // 12: tensorflow.TensorProto
+	(TensorDebugMode)(0),        // 0: tensorflow.TensorDebugMode
+	(*DebugEvent)(nil),          // 1: tensorflow.DebugEvent
+	(*DebugMetadata)(nil),       // 2: tensorflow.DebugMetadata
+	(*SourceFile)(nil),          // 3: tensorflow.SourceFile
+	(*StackFrameWithId)(nil),    // 4: tensorflow.StackFrameWithId
+	(*CodeLocation)(nil),        // 5: tensorflow.CodeLocation
+	(*GraphOpCreation)(nil),     // 6: tensorflow.GraphOpCreation
+	(*DebuggedGraph)(nil),       // 7: tensorflow.DebuggedGraph
+	(*DebuggedDevice)(nil),      // 8: tensorflow.DebuggedDevice
+	(*Execution)(nil),           // 9: tensorflow.Execution
+	(*GraphExecutionTrace)(nil), // 10: tensorflow.GraphExecutionTrace
+	(*graph_debug_info_proto.GraphDebugInfo_FileLineCol)(nil), // 11: tensorflow.GraphDebugInfo.FileLineCol
+	(*tensor_go_proto.TensorProto)(nil),                       // 12: tensorflow.TensorProto
 }
 var file_tensorflow_core_protobuf_debug_event_proto_depIdxs = []int32{
 	2,  // 0: tensorflow.DebugEvent.debug_metadata:type_name -> tensorflow.DebugMetadata
@@ -1355,7 +1356,6 @@ func file_tensorflow_core_protobuf_debug_event_proto_init() {
 	if File_tensorflow_core_protobuf_debug_event_proto != nil {
 		return
 	}
-	file_tensorflow_core_framework_graph_debug_info_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_tensorflow_core_protobuf_debug_event_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DebugEvent); i {

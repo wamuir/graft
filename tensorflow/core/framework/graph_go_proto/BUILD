@@ -7,6 +7,7 @@ go_library(
     visibility = ["//visibility:public"],
     deps = [
         "//tensorflow/core/framework/function_go_proto",
+        "//tensorflow/core/framework/graph_debug_info_proto",
         "//tensorflow/core/framework/node_def_go_proto",
         "//tensorflow/core/framework/versions_go_proto",
         "@org_golang_google_protobuf//reflect/protoreflect:go_default_library",
