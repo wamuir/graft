@@ -73,7 +73,7 @@ type NodeDef struct {
 	// one of the names from the corresponding OpDef's attr field).
 	// The values must have a type matching the corresponding OpDef
 	// attr's type field.
-	// TODO(josh11b): Add some examples here showing best practices.
+	// TODO(joshl): Add some examples here showing best practices.
 	Attr map[string]*attr_value_go_proto.AttrValue `protobuf:"bytes,5,rep,name=attr,proto3" json:"attr,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// This stores debug information associated with the node.
 	ExperimentalDebugInfo *NodeDef_ExperimentalDebugInfo `protobuf:"bytes,6,opt,name=experimental_debug_info,json=experimentalDebugInfo,proto3" json:"experimental_debug_info,omitempty"`
