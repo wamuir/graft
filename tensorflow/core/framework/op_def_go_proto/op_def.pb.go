@@ -58,7 +58,7 @@ type OpDef struct {
 	// taking input from multiple devices with a tree of aggregate ops
 	// that aggregate locally within each device (and possibly within
 	// groups of nearby devices) before communicating.
-	// TODO(joshl): Implement that optimization.
+	// TODO(josh11b): Implement that optimization.
 	IsAggregate bool `protobuf:"varint,16,opt,name=is_aggregate,json=isAggregate,proto3" json:"is_aggregate,omitempty"` // for things like add
 	// Ops are marked as stateful if their behavior depends on some state beyond
 	// their input tensors (e.g. variable reading op) or if they have

@@ -30,7 +30,7 @@ type TensorProto struct {
 	unknownFields protoimpl.UnknownFields
 
 	Dtype types_go_proto.DataType `protobuf:"varint,1,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
-	// Shape of the tensor.  TODO(mdevin): sort out the 0-rank issues.
+	// Shape of the tensor.  TODO(touts): sort out the 0-rank issues.
 	TensorShape *tensor_shape_go_proto.TensorShapeProto `protobuf:"bytes,2,opt,name=tensor_shape,json=tensorShape,proto3" json:"tensor_shape,omitempty"`
 	// Version number.
 	//
