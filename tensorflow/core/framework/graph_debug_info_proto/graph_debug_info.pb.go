@@ -34,7 +34,8 @@ type GraphDebugInfo struct {
 	//
 	//	op.name '@' func_name
 	//
-	// For ops in the top-level graph, the func_name is the empty string.
+	// For ops in the top-level graph, the func_name is the empty string and hence
+	// the `@` may be ommitted.
 	// Note that op names are restricted to a small number of characters which
 	// exclude '@', making it impossible to collide keys of this form. Function
 	// names accept a much wider set of characters.
