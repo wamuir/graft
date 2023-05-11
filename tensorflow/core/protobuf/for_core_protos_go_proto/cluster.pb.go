@@ -48,6 +48,9 @@ type JobDef struct {
 	// If the `name` field contains "worker", and the `tasks` map contains a
 	// mapping from 7 to "example.org:2222", then the device prefix
 	// "/job:worker/task:7" will be assigned to "example.org:2222".
+	//
+	// If a job has multiple replicas, host-ports will be comma-delimited, with
+	// one entry for each replica.
 	Tasks map[int32]string `protobuf:"bytes,2,rep,name=tasks,proto3" json:"tasks,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
