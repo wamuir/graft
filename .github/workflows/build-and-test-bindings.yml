@@ -31,10 +31,10 @@ jobs:
         run: bazelisk version
 
       - name: Test
-        run: bazelisk test --config=ci -- //...
+        run: CC=clang bazelisk test --config=ci -- //...
 
       - name: Build Go bindings
-        run: bazelisk build --config=ci -- //tools/graft_package:go_bindings
+        run: CC=clang bazelisk build --config=ci -- //tools/graft_package:go_bindings
 
       - name: Archive Go bindings
         uses: actions/upload-artifact@v3
@@ -72,8 +72,8 @@ jobs:
 
       - name: Run gazelle
         run: |
-          bazelisk run //:gazelle
-          bazelisk run //:gazelle-update-repos
+          CC=clang bazelisk run //:gazelle
+          CC=clang bazelisk run //:gazelle-update-repos
 
       - name: Test bindings
-        run: bazelisk test --config=ci -- //tensorflow/...
+        run: CC=clang bazelisk test --config=ci -- //tensorflow/...
