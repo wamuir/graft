@@ -1,0 +1,68 @@
+module(
+    name = "com_github_wamuir_graft",
+    version = "0.0.0",
+)
+
+# Dependencies
+bazel_dep(
+    name = "rules_go",
+    repo_name = "io_bazel_rules_go",
+    version = "0.39.1",
+)
+
+# Extensions
+tf_repos = use_extension(
+    "//third_party/org_tensorflow:workspace.bzl",
+    "download_tf_repositories",
+)
+
+use_repo(
+    tf_repos,
+    "libtensorflow_linux_x86_64_cpu",
+    "libtensorflow_linux_x86_64_gpu",
+    "libtensorflow_macos_x86_64_cpu",
+    "libtensorflow_proto_linux_x86_64_cpu",
+    "libtensorflow_proto_linux_x86_64_gpu",
+    "libtensorflow_proto_macos_x86_64_cpu",
+    "tensorflow_base_api_def",
+    "tensorflow_go",
+)
+
+go_deps = use_extension("//tensorflow:deps.bzl", "go_dependencies")
+
+use_repo(go_deps, "org_golang_google_protobuf")
+
+# Dev dependencies
+bazel_dep(
+    name = "bazel_skylib",
+    dev_dependency = True,
+    version = "1.4.2",
+)
+bazel_dep(
+    name = "gazelle",
+    dev_dependency = True,
+    repo_name = "bazel_gazelle",
+    version = "0.31.0",
+)
+bazel_dep(
+    name = "platforms",
+    dev_dependency = True,
+    version = "0.0.6",
+)
+bazel_dep(
+    name = "protobuf",
+    dev_dependency = True,
+    repo_name = "com_google_protobuf",
+    version = "21.7",
+)
+bazel_dep(
+    name = "rules_pkg",
+    dev_dependency = True,
+    version = "0.9.1",
+)
+bazel_dep(
+    name = "stardoc",
+    dev_dependency = True,
+    repo_name = "io_bazel_stardoc",
+    version = "0.5.6",
+)
