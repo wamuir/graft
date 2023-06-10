@@ -42,6 +42,7 @@ if [ -z "${TF_VERSION}" ]; then
 fi
 
 cd "$(git rev-parse --show-toplevel)" \
+   && .github/workflows/update-bzl-module.sh "${TF_VERSION}" \
    && .github/workflows/update-org_tensorflow-version.sh "${TF_VERSION}" \
    && .github/workflows/update-org_tensorflow-workspace.sh "${TF_VERSION}" \
    && .github/workflows/update-readme.sh "${TF_VERSION}" \

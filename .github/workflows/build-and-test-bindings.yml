@@ -77,3 +77,6 @@ jobs:
 
       - name: Test bindings
         run: CC=clang bazelisk test --config=ci -- //tensorflow/...
+
+      - name: Test bindings (bzlmod)
+        run: CC=clang bazelisk test --config=ci --enable_bzlmod -- //tensorflow/...
