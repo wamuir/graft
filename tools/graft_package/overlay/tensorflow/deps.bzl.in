@@ -3,7 +3,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 load("//third_party/org_tensorflow:workspace.bzl", _tf_repositories = "tf_repositories")
 
-def _go_dependencies():
+def _go_dependencies(ctx):
     pass
 
 def graft_dependencies():
@@ -25,7 +25,7 @@ def graft_dependencies():
         name = "com_google_protobuf",
         repo_rule = http_archive(
             name = "com_google_protobuf",
-	    sha256 = "0b0395d34e000f1229679e10d984ed7913078f3dd7f26cf0476467f5e65716f4",
+            sha256 = "0b0395d34e000f1229679e10d984ed7913078f3dd7f26cf0476467f5e65716f4",
             strip_prefix = "protobuf-23.2",
             urls = [
                 "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v23.2.tar.gz",
@@ -34,5 +34,9 @@ def graft_dependencies():
         ),
     )
 
-    _go_dependencies()
-    _tf_repositories()
+    _go_dependencies(ctx = None)
+    _tf_repositories(ctx = None)
+
+go_dependencies = module_extension(
+    implementation = _go_dependencies,
+)

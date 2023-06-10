@@ -1,7 +1,7 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@com_github_wamuir_graft//tools/build_defs/repo:http.bzl", "http_embedded_archive")
 
-def tf_repositories():
+def tf_repositories(ctx):
     ###########################################################################
     # libtensorflow
     ###########################################################################
@@ -85,3 +85,7 @@ def tf_repositories():
         patch_args = ["-p1"],
         patches = ["@com_github_wamuir_graft//third_party/org_tensorflow/tensorflow_go:tensorflow_go_op.patch"],
     )
+
+download_tf_repositories = module_extension(
+    implementation = tf_repositories,
+)
