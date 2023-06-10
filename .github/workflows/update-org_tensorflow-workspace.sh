@@ -38,7 +38,7 @@ EOF
 cat <<EOF > "${WORKSPACE}"
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-def tf_repositories():
+def tf_repositories(ctx):
 EOF
 
 cat <<EOF >> "${WORKSPACE}"
@@ -134,3 +134,10 @@ http_archive "tensorflow_go" \
         ]" \
     "tensorflow-${TF_VERSION}/tensorflow/go" \
     "https://github.com/tensorflow/tensorflow/archive/refs/tags/v${TF_VERSION}.tar.gz"
+
+cat <<EOF >> "${WORKSPACE}"
+
+download_tf_repositories = module_extension(
+    implementation = tf_repositories,
+)
+EOF
