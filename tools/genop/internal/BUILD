@@ -38,5 +38,5 @@ go_test(
 alias(
     name = "go_default_library",
     actual = ":internal",
-    visibility = ["//tools/genop:__pkg__"],
+    visibility = ["//tools/genop:__subpackages__"],
 )
