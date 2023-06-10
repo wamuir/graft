@@ -22,6 +22,9 @@ pkg_tar(
         "//tools/conditions:linux_x86_64_gpu": ["@libtensorflow_proto_linux_x86_64_gpu//:protos_all_proto_srcs"],
         "//tools/conditions:macos_x86_64_cpu": ["@libtensorflow_proto_macos_x86_64_cpu//:protos_all_proto_srcs"],
     }),
+    remap_paths = {
+        "external/_main~download_tf_repositories~libtensorflow_proto_linux_x86_64_cpu": "",
+    },
     strip_prefix = select({
         "//tools/conditions:linux_x86_64_cpu": "/external/libtensorflow_proto_linux_x86_64_cpu",
         "//tools/conditions:linux_x86_64_gpu": "/external/libtensorflow_proto_linux_x86_64_gpu",
@@ -37,6 +40,11 @@ pkg_tar(
         "//tools/conditions:linux_x86_64_gpu": ["@libtensorflow_linux_x86_64_gpu//:pkg_files"],
         "//tools/conditions:macos_x86_64_cpu": ["@libtensorflow_macos_x86_64_cpu//:pkg_files"],
     }),
+    remap_paths = {
+        "external/_main~download_tf_repositories~libtensorflow_linux_x86_64_cpu": "",
+        "external/_main~download_tf_repositories~libtensorflow_linux_x86_64_gpu": "",
+        "external/_main~download_tf_repositories~libtensorflow_macos_x86_64_cpu": "",
+    },
     strip_prefix = select({
         "//tools/conditions:linux_x86_64_cpu": "/external/libtensorflow_linux_x86_64_cpu",
         "//tools/conditions:linux_x86_64_gpu": "/external/libtensorflow_linux_x86_64_gpu",
@@ -70,6 +78,9 @@ pkg_tar(
     srcs = ["@tensorflow_go//:go_source"],
     mode = "0644",
     package_dir = "src/github.com/tensorflow/tensorflow/tensorflow/go",
+    remap_paths = {
+        "external/_main~download_tf_repositories~tensorflow_go": "",
+    },
     strip_prefix = "/external/tensorflow_go",
     visibility = ["//:__subpackages__"],
 )

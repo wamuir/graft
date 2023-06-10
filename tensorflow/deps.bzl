@@ -3,7 +3,7 @@ load("@bazel_gazelle//:deps.bzl", "go_repository")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 
-def _go_dependencies():
+def _go_dependencies(ctx):
     go_repository(
         name = "com_github_golang_protobuf",
         importpath = "github.com/golang/protobuf",
@@ -57,5 +57,9 @@ def graft_dependencies():
         ),
     )
 
-    _go_dependencies()
-    _tf_repositories()
+    _go_dependencies(ctx = None)
+    _tf_repositories(ctx = None)
+
+go_dependencies = module_extension(
+    implementation = _go_dependencies,
+)

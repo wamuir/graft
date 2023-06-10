@@ -15,13 +15,15 @@ TMP=$$(mktemp -d)
 trap "rm -rf $${TMP}" EXIT
 
 # Untar well-known protobufs.
+mkdir -p $${TMP}/external/com_google_protobuf
 tar cf - $(locations @com_google_protobuf//:well_known_type_protos) \
-  | tar x --directory=$${TMP}
+  | tar x --directory=$${TMP}/external/com_google_protobuf --strip-components=2
 
 # Untar TensorFlow core protobufs.
-mkdir -p $${TMP}/external/libtensorflow_proto
+mkdir -p $${TMP}/external/libtensorflow_proto/tensorflow
 tar xf $(location //tools/lib_package:libtensorflow_proto) \
-  --directory=$${TMP}/external/libtensorflow_proto
+  --directory=$${TMP}/external/libtensorflow_proto/tensorflow \
+  --strip-components=1
 
 # Generated Go code will be written to tensorflow/src.
 mkdir -p $${TMP}/tensorflow/src
