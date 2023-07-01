@@ -105,7 +105,7 @@ type XPlane struct {
 	unknownFields protoimpl.UnknownFields
 
 	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Name of this line.
+	// Name of this XPlane.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Parallel timelines grouped in this plane. XLines with the same id
 	// are effectively the same timeline.
