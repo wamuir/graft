@@ -41,7 +41,7 @@ type FingerprintDef struct {
 	// Hash of the checkpoint.
 	CheckpointHash uint64 `protobuf:"varint,5,opt,name=checkpoint_hash,json=checkpointHash,proto3" json:"checkpoint_hash,omitempty"`
 	// Version specification of the fingerprint.
-	Version *versions_go_proto.VersionDef `protobuf:"bytes,6,opt,name=version,proto3" json:"version,omitempty"`
+	Version *versions_go_proto.VersionDef `protobuf:"bytes,6,opt,name=version,proto3" json:"version,omitempty"` // TODO(b/290068219): add USM version when GA
 }
 
 func (x *FingerprintDef) Reset() {
