@@ -19,8 +19,8 @@ def _go_dependencies(ctx):
     go_repository(
         name = "org_golang_google_protobuf",
         importpath = "google.golang.org/protobuf",
-        sum = "h1:kPPoIgf3TsEvrm0PFe15JQ+570QVxYzEvvHqChK+cng=",
-        version = "v1.30.0",
+        sum = "h1:g0LDEJHgrBl9N9r17Ru3sqWhkIx2NB67okBHPwC7hs8=",
+        version = "v1.31.0",
     )
     go_repository(
         name = "org_golang_x_xerrors",
@@ -48,11 +48,11 @@ def graft_dependencies():
         name = "com_google_protobuf",
         repo_rule = http_archive(
             name = "com_google_protobuf",
-            sha256 = "0b0395d34e000f1229679e10d984ed7913078f3dd7f26cf0476467f5e65716f4",
-            strip_prefix = "protobuf-23.2",
+            sha256 = "75be42bd736f4df6d702a0e4e4d30de9ee40eac024c4b845d17ae4cc831fe4ae",
+            strip_prefix = "protobuf-21.7",
             urls = [
-                "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v23.2.tar.gz",
-                "https://github.com/protocolbuffers/protobuf/archive/v23.2.tar.gz",
+                "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v21.7.tar.gz",
+                "https://github.com/protocolbuffers/protobuf/archive/v21.7.tar.gz",
             ],
         ),
     )
