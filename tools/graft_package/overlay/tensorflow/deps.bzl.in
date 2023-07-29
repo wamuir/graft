@@ -25,11 +25,11 @@ def graft_dependencies():
         name = "com_google_protobuf",
         repo_rule = http_archive(
             name = "com_google_protobuf",
-            sha256 = "0b0395d34e000f1229679e10d984ed7913078f3dd7f26cf0476467f5e65716f4",
-            strip_prefix = "protobuf-23.2",
+            sha256 = "75be42bd736f4df6d702a0e4e4d30de9ee40eac024c4b845d17ae4cc831fe4ae",
+            strip_prefix = "protobuf-21.7",
             urls = [
-                "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v23.2.tar.gz",
-                "https://github.com/protocolbuffers/protobuf/archive/v23.2.tar.gz",
+                "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v21.7.tar.gz",
+                "https://github.com/protocolbuffers/protobuf/archive/v21.7.tar.gz",
             ],
         ),
     )
