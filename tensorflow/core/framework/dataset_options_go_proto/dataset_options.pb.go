@@ -984,7 +984,7 @@ type Options struct {
 	//
 	//	*Options_Deterministic
 	OptionalDeterministic isOptions_OptionalDeterministic `protobuf_oneof:"optional_deterministic"`
-	// The distribution strategy options associated with the dataset.
+	// The autotune options associated with the dataset.
 	AutotuneOptions *AutotuneOptions `protobuf:"bytes,7,opt,name=autotune_options,json=autotuneOptions,proto3" json:"autotune_options,omitempty"`
 	// The distribution strategy options associated with the dataset.
 	DistributeOptions *DistributeOptions `protobuf:"bytes,2,opt,name=distribute_options,json=distributeOptions,proto3" json:"distribute_options,omitempty"`
