@@ -22,14 +22,15 @@ tar cf - $(locations @com_google_protobuf//:well_known_type_protos) \
 # Untar TensorFlow core protobufs.
 mkdir -p $${TMP}/external/libtensorflow_proto/tensorflow
 tar xf $(location //tools/lib_package:libtensorflow_proto) \
-  --directory=$${TMP}/external/libtensorflow_proto/tensorflow \
-  --strip-components=1
+  --directory=$${TMP}/external/libtensorflow_proto
+
+mv $${TMP}/external/libtensorflow_proto/external/local_tsl/tsl $${TMP}/external/libtensorflow_proto/tsl
 
 # Generated Go code will be written to tensorflow/src.
 mkdir -p $${TMP}/tensorflow/src
 
 # Generate.
-find $${TMP}/external/libtensorflow_proto/tensorflow -name "*.proto" \
+find $${TMP}/external/libtensorflow_proto -name "*.proto" \
   | xargs $(execpath @com_google_protobuf//:protoc) \
     --go_out=$${TMP}/tensorflow/src \
     --plugin=protoc-gen-go=$(execpath @org_golang_google_protobuf//cmd/protoc-gen-go) \

@@ -56,7 +56,7 @@ index d2b7e81..87e93d5 100644
 @@ -1,3 +1,5 @@
  syntax = "proto3";
  
- import public "tensorflow/tsl/protobuf/error_codes.proto";
+ import public "tsl/protobuf/error_codes.proto";
 +
 +option go_package = "github.com/tensorflow/tensorflow/tensorflow/go/core/lib/core/error_codes_proto_go_proto";
 diff --git a/tensorflow/core/profiler/profiler_options.proto b/tensorflow/core/profiler/profiler_options.proto
@@ -66,7 +66,7 @@ index 8b0012f..01f8a2b 100644
 @@ -3,3 +3,5 @@ syntax = "proto3";
  package tensorflow.dummy;
  
- import public "tensorflow/tsl/profiler/protobuf/profiler_options.proto";
+ import public "tsl/profiler/protobuf/profiler_options.proto";
 +
 +option go_package = "github.com/tensorflow/tensorflow/tensorflow/go/core/profiler/profiler_options_proto_go_proto";
 diff --git a/tensorflow/core/profiler/protobuf/xplane.proto b/tensorflow/core/profiler/protobuf/xplane.proto
@@ -76,7 +76,7 @@ index 0dd575d..814eec4 100644
 @@ -3,3 +3,5 @@ syntax = "proto3";
  package tensorflow.profiler.empty;
  
- import public "tensorflow/tsl/profiler/protobuf/xplane.proto";
+ import public "tsl/profiler/protobuf/xplane.proto";
 +
 +option go_package = "github.com/tensorflow/tensorflow/tensorflow/go/core/profiler/protobuf/for_profiler_protos_go_proto";
 diff --git a/tensorflow/core/util/memmapped_file_system.proto b/tensorflow/core/util/memmapped_file_system.proto
@@ -112,6 +112,6 @@ index 20aa73a..203a41e 100644
 @@ -4,3 +4,5 @@ syntax = "proto3";
  package tensorflow.dummy;
  
- import public "tensorflow/tsl/protobuf/test_log.proto";
+ import public "tsl/protobuf/test_log.proto";
 +
 +option go_package = "github.com/tensorflow/tensorflow/tensorflow/go/core/util/test_log_proto_go_proto";

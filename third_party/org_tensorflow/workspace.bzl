@@ -10,12 +10,20 @@ def tf_repositories(ctx):
         name = "libtensorflow_linux_x86_64_cpu",
         build_file = "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow:libtensorflow.BUILD",
         urls = ["https://storage.googleapis.com/libtensorflow-nightly/latest/libtensorflow-cpu-linux-x86_64.tar.gz"],
+        patch_args = ["-p1"],
+        patches = [
+            "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow:libtensorflow.patch",
+        ],
     )
 
     http_archive(
         name = "libtensorflow_linux_x86_64_gpu",
         build_file = "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow:libtensorflow.BUILD",
         urls = ["https://storage.googleapis.com/libtensorflow-nightly/latest/libtensorflow-gpu-linux-x86_64.tar.gz"],
+        patch_args = ["-p1"],
+        patches = [
+            "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow:libtensorflow.patch",
+        ],
     )
 
     http_embedded_archive(
