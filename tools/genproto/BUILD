@@ -24,8 +24,6 @@ mkdir -p $${TMP}/external/libtensorflow_proto/tensorflow
 tar xf $(location //tools/lib_package:libtensorflow_proto) \
   --directory=$${TMP}/external/libtensorflow_proto
 
-mv $${TMP}/external/libtensorflow_proto/external/local_tsl/tsl $${TMP}/external/libtensorflow_proto/tsl
-
 # Generated Go code will be written to tensorflow/src.
 mkdir -p $${TMP}/tensorflow/src
 
