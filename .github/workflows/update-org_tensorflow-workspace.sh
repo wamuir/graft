@@ -50,27 +50,21 @@ EOF
 http_archive "libtensorflow_linux_x86_64_cpu" \
     "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow:libtensorflow.BUILD" \
     "-p1" \
-    "[
-            \"@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow:libtensorflow.patch\",
-        ]" \
+    "[]" \
     "" \
     "https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-linux-x86_64-${TF_VERSION}.tar.gz"
 
 http_archive "libtensorflow_linux_x86_64_gpu" \
     "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow:libtensorflow.BUILD" \
     "-p1" \
-    "[
-            \"@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow:libtensorflow.patch\",
-        ]" \
+    "[]" \
     "" \
     "https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-gpu-linux-x86_64-${TF_VERSION}.tar.gz"
 
 http_archive "libtensorflow_macos_x86_64_cpu" \
     "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow:libtensorflow.BUILD" \
     "-p1" \
-    "[
-            \"@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow:libtensorflow.patch\",
-        ]" \
+    "[]" \
     "" \
     "https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-darwin-x86_64-${TF_VERSION}.tar.gz"
 
