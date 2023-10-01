@@ -1,0 +1,15 @@
+diff --git a/internal/go_repository.bzl b/internal/go_repository.bzl
+index 8dac6eb..1d14502 100644
+--- a/internal/go_repository.bzl
++++ b/internal/go_repository.bzl
+@@ -292,7 +292,9 @@ def _go_repository_impl(ctx):
+             # the `go_deps` extension. All extension-generated repos have names of the form
+             # `<prefix>~<name set by the extension>`.
+             extension_repo_prefix = ctx.attr.name.rpartition("~")[0] + "~"
+-            repo_config = ctx.path(Label("@@" + extension_repo_prefix + "bazel_gazelle_go_repository_config//:WORKSPACE"))
++            # repo_config = ctx.path(Label("@@" + extension_repo_prefix + "bazel_gazelle_go_repository_config//:WORKSPACE"))
++            # repo_config = ctx.path(Label("bazel_gazelle_go_repository_config//:WORKSPACE"))
++            repo_config = ctx.path(ctx.attr.build_config)
+         else:
+             repo_config = ctx.path(ctx.attr.build_config)
+         cmd = [
