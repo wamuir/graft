@@ -1,6 +1,6 @@
 # Graft
 [![tensorflow version](https://img.shields.io/badge/tf-nightly-FF6F00?logo=tensorflow&logoColor=FF6F00)](https://github.com/tensorflow/tensorflow/tree/nightly)
-[![nightly](https://img.shields.io/github/actions/workflow/status/wamuir/graft/integrate-nightly-changes.yml?branch=main&label=nightly%20ci&logo=github&event=schedule)](https://github.com/wamuir/graft/actions/workflows/integrate-nightly-changes.yml?query=branch%3Anightly)
+[![nightly](https://img.shields.io/github/actions/workflow/status/wamuir/graft/integrate-nightly-changes.yml?branch=nightly&label=nightly%20ci&logo=github&event=schedule)](https://github.com/wamuir/graft/actions/workflows/integrate-nightly-changes.yml?query=branch%3Anightly)
 [![go.dev reference](https://pkg.go.dev/badge/wamuir/graft)](https://pkg.go.dev/github.com/wamuir/graft/tensorflow)
 
 ## About
