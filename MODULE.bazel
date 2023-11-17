@@ -1,6 +1,6 @@
 module(
     name = "com_github_wamuir_graft",
-    version = "2.14.0",
+    version = "2.14.1",
 )
 
 # Dependencies
