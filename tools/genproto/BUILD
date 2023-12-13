@@ -38,9 +38,9 @@ find $${TMP}/external/libtensorflow_proto -name "*.proto" \
 # Tar generated Go code.
 tar cf $@ --mtime='UTC 1970-01-01' -C $${TMP}/tensorflow src
 """,
-    exec_tools = [
-        "@org_golang_google_protobuf//cmd/protoc-gen-go",
+    tools = [
         "@com_google_protobuf//:protoc",
+        "@org_golang_google_protobuf//cmd/protoc-gen-go",
     ],
     visibility = ["//tools:__subpackages__"],
 )
