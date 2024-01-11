@@ -18,10 +18,6 @@ rules_pkg_dependencies()
 http_archive(
     name = "io_bazel_rules_go",
     integrity = "sha256-fHbWI2so/2laoozzX5XeMXqUcv0fsUrHl8m/aE8Js3w=",
-    patch_args = ["-p1"],
-    patches = [
-        "//third_party/com_github_bazelbuild_rules_go:rules_go.patch",
-    ],
     urls = [
         "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.44.2/rules_go-v0.44.2.zip",
         "https://github.com/bazelbuild/rules_go/releases/download/v0.44.2/rules_go-v0.44.2.zip",

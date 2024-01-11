@@ -9,12 +9,6 @@ bazel_dep(
     version = "0.44.2",
     repo_name = "io_bazel_rules_go",
 )
-single_version_override(
-    module_name = "rules_go",
-    patch_strip = 1,
-    patches = ["//third_party/com_github_bazelbuild_rules_go:rules_go.patch"],
-    version = "0.44.2",
-)
 
 # Extensions
 tf_repos = use_extension(
