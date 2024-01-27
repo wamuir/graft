@@ -37,6 +37,7 @@ EOF
 
 cat <<EOF > "${WORKSPACE}"
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@libtensorflow_defaults//:config.bzl", "LIBTENSORFLOW_PKG_URL")
 
 def tf_repositories(ctx):
 EOF
@@ -69,6 +70,12 @@ http_archive "libtensorflow_macos_x86_64_cpu" \
     "https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-darwin-x86_64-${TF_VERSION}.tar.gz"
 
 cat <<EOF >> "${WORKSPACE}"
+
+    http_archive(
+        name = "libtensorflow_other_build",
+        build_file = "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow:libtensorflow.BUILD",
+        urls = [LIBTENSORFLOW_PKG_URL],
+    )
 
     ###########################################################################
     # protos

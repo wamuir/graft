@@ -16,6 +16,11 @@ single_version_override(
     version = "0.44.2",
 )
 
+bazel_dep(
+    name = "platforms",
+    version = "0.0.7",
+)
+
 # Extensions
 tf_repos = use_extension(
     "//third_party/org_tensorflow:workspace.bzl",
@@ -26,12 +31,20 @@ use_repo(
     "libtensorflow_linux_x86_64_cpu",
     "libtensorflow_linux_x86_64_gpu",
     "libtensorflow_macos_x86_64_cpu",
+    "libtensorflow_other_build",
     "libtensorflow_proto_linux_x86_64_cpu",
     "libtensorflow_proto_linux_x86_64_gpu",
     "libtensorflow_proto_macos_x86_64_cpu",
     "tensorflow_base_api_def",
     "tensorflow_go",
 )
+
+libtensorflow_defaults = use_repo_rule(
+    "//third_party/org_tensorflow:defaults.bzl",
+    "libtensorflow_defaults",
+)
+
+libtensorflow_defaults(name = "libtensorflow_defaults")
 
 go_deps = use_extension("//tensorflow:deps.bzl", "go_dependencies")
 use_repo(go_deps, "org_golang_google_protobuf")
@@ -55,11 +68,6 @@ single_version_override(
     version = "0.35.0",
 )
 
-bazel_dep(
-    name = "platforms",
-    version = "0.0.7",
-    dev_dependency = True,
-)
 bazel_dep(
     name = "protobuf",
     version = "21.7",

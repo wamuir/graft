@@ -64,6 +64,10 @@ load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 
 protobuf_deps()
 
+load("//third_party/org_tensorflow:defaults.bzl", "libtensorflow_defaults")
+
+libtensorflow_defaults(name = "libtensorflow_defaults")
+
 load("//third_party/org_tensorflow:workspace.bzl", "tf_repositories")
 
 tf_repositories(ctx = None)

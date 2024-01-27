@@ -1,5 +1,6 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@com_github_wamuir_graft//tools/build_defs/repo:http.bzl", "http_embedded_archive")
+load("@libtensorflow_defaults//:config.bzl", "LIBTENSORFLOW_PKG_URL")
 
 def tf_repositories(ctx):
     ###########################################################################
@@ -23,6 +24,12 @@ def tf_repositories(ctx):
         build_file = "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow:libtensorflow.BUILD",
         urls = ["https://storage.googleapis.com/libtensorflow-nightly/prod/tensorflow/release/macos/latest/macos_cpu_libtensorflow_binaries.tar.gz"],
         inner_archive = "lib_package/libtensorflow-cpu-darwin-x86_64.tar.gz",
+    )
+
+    http_archive(
+        name = "libtensorflow_other_build",
+        build_file = "@com_github_wamuir_graft//third_party/org_tensorflow/libtensorflow:libtensorflow.BUILD",
+        urls = [LIBTENSORFLOW_PKG_URL],
     )
 
     ###########################################################################
