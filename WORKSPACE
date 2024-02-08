@@ -17,14 +17,10 @@ rules_pkg_dependencies()
 
 http_archive(
     name = "io_bazel_rules_go",
-    integrity = "sha256-fHbWI2so/2laoozzX5XeMXqUcv0fsUrHl8m/aE8Js3w=",
-    patch_args = ["-p1"],
-    patches = [
-        "//third_party/com_github_bazelbuild_rules_go:rules_go.patch",
-    ],
+    sha256 = "6734a719993b1ba4ebe9806e853864395a8d3968ad27f9dd759c196b3eb3abe8",
     urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.44.2/rules_go-v0.44.2.zip",
-        "https://github.com/bazelbuild/rules_go/releases/download/v0.44.2/rules_go-v0.44.2.zip",
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.45.1/rules_go-v0.45.1.zip",
+        "https://github.com/bazelbuild/rules_go/releases/download/v0.45.1/rules_go-v0.45.1.zip",
     ],
 )
 
@@ -46,7 +42,7 @@ load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
 go_rules_dependencies()
 
-go_register_toolchains(version = "1.20.7")
+go_register_toolchains(version = "1.21.6")
 
 gazelle_dependencies()
 
